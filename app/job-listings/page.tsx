@@ -62,13 +62,6 @@ export default function JobListings() {
         <p className="text-muted-foreground">Find your perfect role from our curated job listings</p>
       </header>
 
-      <div className="mb-8">
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Input placeholder="Search jobs..." className="flex-1" />
-          <Button>Search</Button>
-        </div>
-      </div>
-
       <div className="grid gap-6 mb-8">
         {currentJobs.map((job) => (
           <Card key={job.ID} className="overflow-hidden">

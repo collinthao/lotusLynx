@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Briefcase, MapPin, DollarSign, Clock, ArrowLeft } from "lucide-react"
 import { useEffect, useState } from "react"
 import { use } from 'react'
+import Header from "@/components/ui/header"
+import { Footer } from "@/components/footer"
 
 
 const fetchJobs = async () => {
@@ -28,9 +30,9 @@ const fetchJobs = async () => {
 
 export default function JobDetail({ params }: { params: { id: string } }) {
   const {id} = use(params);
-  // console.log(React.use(params));
-    const [jobs, setJobs] = useState([]);
-    
+
+  const [jobs, setJobs] = useState([]);
+
     useEffect(() => {
       const fetchData = async () => {
         const data = await fetchJobs();
@@ -39,7 +41,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
       fetchData();
     }, []);
 
-  const job = jobs.find((j) => +j.ID === +id);
+    const job = jobs.find((j) => j.ID === id);
 
   if (!job) {
     return (
@@ -57,6 +59,8 @@ export default function JobDetail({ params }: { params: { id: string } }) {
   }
 
   return (
+    <div>
+      <Header/>
     <div className="container mx-auto py-8 px-4">
       <Link href="/job-listings" className="inline-flex items-center mb-6">
         <Button variant="outline">
@@ -72,7 +76,6 @@ export default function JobDetail({ params }: { params: { id: string } }) {
               <CardTitle className="text-2xl font-bold">{job.JobTitle}</CardTitle>
               <p className="text-xl mt-1">{job.JobCompany}</p>
             </div>
-            <Button size="lg">Apply Now</Button>
           </div>
 
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
@@ -110,14 +113,14 @@ export default function JobDetail({ params }: { params: { id: string } }) {
             </ul>
           </section>
 
-          {/* <section> */}
-            {/* <h2 className="text-xl font-semibold mb-3">Responsibilities</h2> */}
-            {/* <ul className="list-disc pl-5 space-y-1 text-muted-foreground"> */}
-              {/* {job.responsibilities.map((resp, index) => (
+          <section>
+            <h2 className="text-xl font-semibold mb-3">Responsibilities</h2>
+            <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+              {job.Responsibilities.split(',').map((resp, index) => (
                 <li key={index}>{resp}</li>
-              ))} */}
-            {/* </ul> */}
-          {/* </section> */}
+              ))}
+            </ul>
+          </section>
 
           <div className="pt-4">
             <Button size="lg" className="w-full sm:w-auto">
@@ -126,6 +129,8 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           </div>
         </CardContent>
       </Card>
+    </div>
+      <Footer/>
     </div>
   )
 }
