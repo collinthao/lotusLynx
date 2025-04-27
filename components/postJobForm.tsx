@@ -6,7 +6,7 @@ export default function PostJobForm() {
   const [Location, setLocation] = useState("");
   const [JobType, setJobType] = useState("");
   const [SalaryRange, setSalaryRange] = useState("");
-  const [JobDescription, setJobDescription] = useState("");
+  const [Description, setJobDescription] = useState("");
   const [Requirements, setRequirements] = useState("");
   const [Responsibilities, setResponsibilities] = useState("");
 
@@ -20,7 +20,7 @@ export default function PostJobForm() {
       Location,
       JobType,
       SalaryRange,
-      JobDescription,
+      Description,
       Requirements,
       Responsibilities,
     };
@@ -120,7 +120,7 @@ export default function PostJobForm() {
         <textarea
           id="jobDescription"
           rows={4}
-          value={JobDescription}
+          value={Description}
           onChange={(e) => setJobDescription(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
         />
