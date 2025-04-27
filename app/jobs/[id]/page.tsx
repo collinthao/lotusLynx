@@ -74,7 +74,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4">
             <div>
               <CardTitle className="text-2xl font-bold">{job.JobTitle}</CardTitle>
-              <p className="text-xl mt-1">{job.JobCompany}</p>
+              <p className="text-xl mt-1">{job.CompanyName}</p>
             </div>
           </div>
 

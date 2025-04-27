@@ -69,7 +69,7 @@ export default function JobListings() {
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                 <div>
                   <h2 className="text-xl font-semibold mb-2">{job.JobTitle}</h2>
-                  <p className="text-lg mb-2">{job.Company}</p>
+                  <p className="text-lg mb-2">{job.CompanyName}</p>
 
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-3">
                     <div className="flex items-center">
