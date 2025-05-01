@@ -77,7 +77,6 @@ export default function JobDetail({ params }: { params: { id: string } }) {
               <p className="text-xl mt-1">{job.CompanyName}</p>
             </div>
           </div>
-
           <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
             <div className="flex items-center">
               <MapPin className="mr-1 h-4 w-4" />
