@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export function Footer() {
   const navItems = [
-    { label: "Job List", href: "/jobs" },
+    { label: "Job List", href: "/job-listings" },
     { label: "Services", href: "/services" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },

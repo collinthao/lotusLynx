@@ -8,10 +8,10 @@ export default function NavBar()
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center">
             <Image
-              src="/placeholder.svg?height=40&width=120"
+              src="./Stationery Cut - Transparent.png"
               alt="LotusLynx Logo"
-              width={120}
-              height={40}
+              width={160}
+              height={80}
               className="h-10"
             />
           </Link>

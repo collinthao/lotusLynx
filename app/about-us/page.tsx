@@ -1,6 +1,22 @@
 import Image from "next/image"
 import Link from "next/link"
 import Header from "@/components/ui/header"
+import Footer from "@/components/ui/footer"
+
+const founders = [
+  {
+    "Name": "Ashley Bender",
+    "Role": "Founder & CEO",
+    "Link": "https://www.linkedin.com/in/ashley-bender-6730b578/",
+    "Image": './ashley_headshot.png'
+  },
+  {
+    "Name": "Kevin McKenzie",
+    "Role": "Managing Partner",
+    "Link": "",
+    "Image": './default_picture.webp'
+  },
+]
 
 export default function AboutPage() {
   return (
@@ -32,7 +48,7 @@ export default function AboutPage() {
             </div>
             <div>
               <Image
-                src="/placeholder.svg?height=300&width=400"
+                src="./ashley_headshot_2.jpeg"
                 alt="Our Mission"
                 width={400}
                 height={300}
@@ -47,7 +63,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
               <Image
-                src="/placeholder.svg?height=300&width=400"
+                src="./ashley_family.jpg"
                 alt="Company Image"
                 width={400}
                 height={300}
@@ -66,69 +82,51 @@ export default function AboutPage() {
 
         {/* Team Section */}
         <section className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-3xl font-bold text-[#282041] mb-12">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="w-40 h-40 rounded-full bg-[#eaeaea] mb-4"></div>
-                <h3 className="text-xl font-semibold">First LastName</h3>
-                <p className="text-gray-600">Founder & CEO</p>
-              </div>
-            ))}
-          </div>
-        </section>
+  <h2 className="text-3xl font-bold text-[#282041] mb-12">Our Team</h2>
+  <div className="flex flex-wrap justify-center gap-36">
+    {[0, 1].map((i) => (
+      <div key={i} className="flex flex-col items-center">
+        <a href={founders[i]["Link"]} target="_blank" rel="noopener noreferrer">
+          <img
+            src={founders[i]["Image"]}
+            alt={founders[i]["Name"]}
+            className="w-40 h-40 rounded-full object-cover mb-4 hover:opacity-90 transition"
+          />
+        </a>
+        <h3 className="text-xl font-semibold">{founders[i]["Name"]}</h3>
+        <p className="text-gray-600">{founders[i]["Role"]}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
 
         {/* CTA Section */}
-        <section className="container mx-auto px-4 py-12 text-center">
-          <h2 className="text-3xl font-bold text-[#282041] mb-4">Ready to Find Your Perfect Match? H3</h2>
-          <p className="max-w-2xl mx-auto text-gray-700 mb-8">
+        <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h2 className="text-3xl font-bold text-[#282041] mb-4">Ready to Find Your Perfect Match?</h2>
+          <p className="text-gray-700 mb-8">
             Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
           </p>
-          <div className="flex justify-center gap-4">
-            <button className="bg-[#282041] text-white px-6 py-2 rounded flex items-center gap-2">
-              <span className="w-4 h-4 bg-white rounded-sm inline-block"></span>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
               I'm an Employer
-            </button>
-            <button className="border border-[#282041] text-[#282041] px-6 py-2 rounded flex items-center gap-2">
-              <span className="w-4 h-4 border border-[#282041] rounded-sm inline-block"></span>
+            </Link>
+            <Link
+              href="/job-listings"
+              className="bg-transparent border border-[#282041] text-[#282041] px-6 py-3 rounded-md font-medium"
+            >
               I'm a Job Seeker
-            </button>
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#282041] text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center mb-6">
-            <Image
-              src="/placeholder.svg?height=40&width=120"
-              alt="LotusLynx Logo"
-              width={120}
-              height={40}
-              className="h-10 w-auto mb-6"
-            />
-            <nav className="flex justify-center space-x-6 mb-6">
-              <Link href="/jobs" className="hover:underline">
-                Job List
-              </Link>
-              <Link href="/services" className="hover:underline">
-                Services
-              </Link>
-              <Link href="/about" className="hover:underline">
-                About
-              </Link>
-              <Link href="/contact" className="hover:underline">
-                Contact
-              </Link>
-            </nav>
-            <div className="text-sm text-center">
-              <p>Copyright © 2025 Lotus Lynx. All rights reserved. Privacy Policy.</p>
-              <p>All rights reserved. Privacy Policy.</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   )
 }

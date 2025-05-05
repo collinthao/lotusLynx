@@ -37,14 +37,25 @@ export default function ContactPage() {
         </section>
 
         {/* CTA section */}
-        <section className="bg-gray-100 py-16">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl font-bold text-primary mb-4">Ready to Find Your Perfect Match?</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
-            </p>
+        <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h2 className="text-3xl font-bold text-[#282041] mb-4">Ready to Find Your Perfect Match?</h2>
+          <p className="text-gray-700 mb-8">
+            Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+              I'm an Employer
+            </Link>
+            <Link
+              href="/job-listings"
+              className="bg-transparent border border-[#282041] text-[#282041] px-6 py-3 rounded-md font-medium"
+            >
+              I'm a Job Seeker
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
       </main>
 
       {/* Footer */}

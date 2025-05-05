@@ -8,14 +8,14 @@ export default function Footer()
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center mb-8">
             <Image
-              src="/placeholder.svg?height=40&width=120"
+              src="/Stationery Cut - Transparent.png"
               alt="LotusLynx Logo"
               width={120}
               height={40}
               className="h-10 mb-8"
             />
             <div className="flex space-x-8 text-sm">
-              <Link href="/job-list" className="hover:underline">
+              <Link href="/job-listings" className="hover:underline">
                 Job List
               </Link>
               <Link href="/services" className="hover:underline">

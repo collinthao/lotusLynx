@@ -13,7 +13,7 @@ export default function Header()
             <Phone className="h-4 w-4" />
             <span className="text-sm">+1 262-234-5467</span>
           </div>
-            <Link href="/login" className="text-sm hover:underline">
+            <Link href="/sign-in" className="text-sm hover:underline">
             Client Login
             </Link>
         </div>

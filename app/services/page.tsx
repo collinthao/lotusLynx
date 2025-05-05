@@ -201,32 +201,25 @@ export default function Services() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-12 md:py-16 border-t border-gray-200">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#282041] mb-4">Ready to Find Your Perfect Match? H3</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto mb-8">
-              Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button className="bg-[#282041] hover:bg-[#282041]/90">I'm an Employer</Button>
-              <Button variant="outline" className="rounded-full">
-                <span className="flex items-center">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="mr-2"
-                  >
-                    <path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  </svg>
-                  I'm a Job Seeker
-                </span>
-              </Button>
-            </div>
+        <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <h2 className="text-3xl font-bold text-[#282041] mb-4">Ready to Find Your Perfect Match?</h2>
+          <p className="text-gray-700 mb-8">
+            Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+              I'm an Employer
+            </Link>
+            <Link
+              href="/job-listings"
+              className="bg-transparent border border-[#282041] text-[#282041] px-6 py-3 rounded-md font-medium"
+            >
+              I'm a Job Seeker
+            </Link>
           </div>
-        </section>
+        </div>
+      </section>
       </main>
 
       {/* Footer */}
