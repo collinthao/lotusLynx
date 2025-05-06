@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function PostJobForm() {
+export default function PostJobForm(session: any) {
   const [JobTitle, setJobTitle] = useState("");
   const [CompanyName, setCompany] = useState("");
   const [Location, setLocation] = useState("");
@@ -9,11 +9,11 @@ export default function PostJobForm() {
   const [Description, setJobDescription] = useState("");
   const [Requirements, setRequirements] = useState("");
   const [Responsibilities, setResponsibilities] = useState("");
-
   // Handle form submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    const Session = session.session;
+    console.log(Session);
     const jobData = {
       JobTitle,
       CompanyName,
@@ -23,6 +23,7 @@ export default function PostJobForm() {
       Description,
       Requirements,
       Responsibilities,
+      Session
     };
 
     // Post job data to the backend

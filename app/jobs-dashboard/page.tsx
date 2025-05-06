@@ -7,6 +7,8 @@ import { useState, useEffect } from "react"
 import Header from "@/components/ui/header"
 import { Footer } from "@/components/footer"
 import PostJobForm from "@/components/postJobForm"
+import { useSearchParams } from 'next/navigation';
+
 
 const fetchJobs = async () => {
   try {
@@ -27,14 +29,16 @@ const fetchJobs = async () => {
 export default function RecruiterDashboard() {
   const [jobToDelete, setJobToDelete] = useState<string | null>(null)
   const [jobs, setJobs] = useState([]);
+  const searchParams = useSearchParams();
+  const Session = searchParams.get('session');
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchJobs();
       setJobs(data);
     };
-    fetchData();
-  }, []);
+    if (Session) fetchData();
+  }, [Session]);
 
   const openDeleteConfirmation = (jobId: string) => {
     console.log(jobId);
@@ -54,7 +58,7 @@ export default function RecruiterDashboard() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ID: jobId }), // Ensure this passes the correct jobId
+        body: JSON.stringify({ ID: jobId, Session: Session }), // Ensure this passes the correct jobId
       });
 
       const result = await response.json();
@@ -85,7 +89,7 @@ export default function RecruiterDashboard() {
           <div className="border rounded-lg p-6">
             <h2 className="text-lg font-semibold mb-4">Post a New Job</h2>
 
-            <PostJobForm/>
+            {Session && <PostJobForm session={Session} />}
           </div>
 
           {/* Job Listings */}

@@ -22,11 +22,28 @@ export function ContactForm() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission logic here
     console.log(formData)
-    // Reset form or show success message
+    try {
+      const response = await fetch('https://5b45hsir08.execute-api.us-east-1.amazonaws.com/dev', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      if (response.ok) {
+        console.log('Job posted successfully:', result);
+      } else {
+        console.error('Error posting job:', result.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
 
   return (
