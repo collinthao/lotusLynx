@@ -55,13 +55,13 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/employer"
+                href="/become-client"
                 className="bg-white text-[#282041] px-6 py-3 rounded-md font-medium flex items-center justify-center"
               >
                 I'm an Employer
               </Link>
               <Link
-                href="/job-seeker"
+                href="/job-listings"
                 className="bg-transparent border border-white text-white px-6 py-3 rounded-md font-medium flex items-center justify-center"
               >
                 I'm a Job Seeker
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
           <div className="hidden md:block">
           <Image
-  src="/man_talking_to_woman.avif"
+  src="/austin-distel-jpHw8ndwJ_Q-unsplash.jpg"
   alt="Recruitment Services"
   width={600}
   height={400}
@@ -156,7 +156,7 @@ export default function Home() {
                   <p className="text-gray-600 text-sm mb-6">
                     Find top-tier executives and leaders for your organization with our specialized search process.
                   </p>
-                  <Link href="#" className="border px-6 py-3 rounded-md text-[#282041] font-medium hover:underline">
+                  <Link href="/services" className="border px-6 py-3 rounded-md text-[#282041] font-medium hover:underline">
                     Learn More
                   </Link>
                 </div>
@@ -201,7 +201,7 @@ export default function Home() {
             Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+            <Link href="//become-client" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
               I'm an Employer
             </Link>
             <Link

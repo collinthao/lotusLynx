@@ -17,7 +17,15 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-8">
             {/* Left side - placeholder for image */}
-            <div className="bg-gray-100 min-h-[400px] md:min-h-[600px]"></div>
+            <div className="bg-gray-100 min-h-[400px] md:min-h-[600px]">
+            <Image
+    src="/lady-smiling-on-phone.jpg" // Replace with your actual image path
+    alt="Client banner"
+    width={700} // Adjust as needed
+    height={600} // Adjust as needed
+    className="object-contain rounded"
+  />
+            </div>
 
             {/* Right side - contact form */}
             <ContactForm />

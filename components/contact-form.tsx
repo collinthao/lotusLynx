@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { Check } from "lucide-react"
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -17,6 +17,9 @@ export function ContactForm() {
     message: "",
   })
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
@@ -24,25 +27,40 @@ export function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log(formData)
-    try {
-      const response = await fetch('https://5b45hsir08.execute-api.us-east-1.amazonaws.com/dev', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    setIsSubmitting(true)
 
-      const result = await response.json();
+    try {
+      const response = await fetch("https://5b45hsir08.execute-api.us-east-1.amazonaws.com/dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
       if (response.ok) {
-        console.log('Job posted successfully:', result);
+        console.log("Message sent successfully:", result)
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          company: "",
+          service: "",
+          message: "",
+        })
+        setIsSuccess(true)
+
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setIsSuccess(false)
+        }, 3000)
       } else {
-        console.error('Error posting job:', result.error);
+        console.error("Submission error:", result.error)
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Network error:", error)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -54,74 +72,28 @@ export function ContactForm() {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium mb-1">
-            Full Name
-          </label>
-          <Input
-            id="fullName"
-            name="fullName"
-            placeholder="John Smith"
-            value={formData.fullName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
-            Email
-          </label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="john@example.com"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium mb-1">
-            Phone Number
-          </label>
-          <Input
-            id="phone"
-            name="phone"
-            placeholder="John Smith"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium mb-1">
-            Company
-          </label>
-          <Input
-            id="company"
-            name="company"
-            placeholder="john@example.com"
-            value={formData.company}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="service" className="block text-sm font-medium mb-1">
-            Service Interested In
-          </label>
-          <Input
-            id="service"
-            name="service"
-            placeholder="ex. Resume help"
-            value={formData.service}
-            onChange={handleChange}
-          />
-        </div>
+        {[
+          { id: "fullName", label: "Full Name", type: "text", placeholder: "John Smith" },
+          { id: "email", label: "Email", type: "email", placeholder: "john@example.com" },
+          { id: "phone", label: "Phone Number", type: "text", placeholder: "555-123-4567" },
+          { id: "company", label: "Company", type: "text", placeholder: "Company Inc." },
+          { id: "service", label: "Service Interested In", type: "text", placeholder: "e.g. Resume help" },
+        ].map((field) => (
+          <div key={field.id}>
+            <label htmlFor={field.id} className="block text-sm font-medium mb-1">
+              {field.label}
+            </label>
+            <Input
+              id={field.id}
+              name={field.id}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={(formData as any)[field.id]}
+              onChange={handleChange}
+              required={["fullName", "email", "phone", "message"].includes(field.id)}
+            />
+          </div>
+        ))}
 
         <div>
           <label htmlFor="message" className="block text-sm font-medium mb-1">
@@ -138,8 +110,20 @@ export function ContactForm() {
           />
         </div>
 
-        <Button type="submit" className="w-full py-2">
-          Send Message
+        <Button type="submit" className="w-full py-2" disabled={isSubmitting || isSuccess}>
+          {isSubmitting ? (
+            <span className="flex items-center gap-1">
+              <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span>Sending...</span>
+            </span>
+          ) : isSuccess ? (
+            <span className="flex items-center gap-1">
+              <Check className="h-4 w-4" />
+              Submitted!
+            </span>
+          ) : (
+            "Send Message"
+          )}
         </Button>
       </form>
     </div>
