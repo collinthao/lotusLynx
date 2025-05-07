@@ -25,7 +25,7 @@ export function ContactInfo() {
           <Phone className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-medium">Phone</h3>
-            <p className="text-gray-600">+1 (555) 123-4567</p>
+            <p className="text-gray-600">+1 262-234-5467</p>
           </div>
         </div>
 
@@ -33,11 +33,11 @@ export function ContactInfo() {
           <Mail className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-medium">Email</h3>
-            <p className="text-gray-600">info@lotuslynx.com</p>
+            <p className="text-gray-600">abender@lotuslynx.com</p>
           </div>
         </div>
 
-        <div className="flex gap-3">
+        {/* <div className="flex gap-3">
           <Clock className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-medium">Business Hours</h3>
@@ -47,7 +47,7 @@ export function ContactInfo() {
               Saturday - Sunday: Closed
             </p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

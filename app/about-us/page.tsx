@@ -36,24 +36,23 @@ export default function AboutPage() {
           </p>
         </section>
 
-        {/* Mission Section */}
         <section className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-[#282041] mb-4">Our Mission</h2>
-              <p className="text-gray-700">
-                The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-                rebirth.
-              </p>
-            </div>
-            <div>
               <Image
                 src="./ashley_headshot_2.jpeg"
-                alt="Our Mission"
+                alt="Company Image"
                 width={400}
                 height={300}
                 className="w-full h-auto bg-[#eaeaea] rounded"
               />
+            </div>
+            <div>
+              <h2 className="text-3xl font-bold text-[#282041] mb-4">Mission</h2>
+              <p className="text-gray-700">
+              The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
+              rebirth.
+              </p>
             </div>
           </div>
         </section>
@@ -111,7 +110,7 @@ export default function AboutPage() {
             Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+            <Link href="//become-client" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
               I'm an Employer
             </Link>
             <Link

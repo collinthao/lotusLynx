@@ -17,14 +17,14 @@ export default function Services() {
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-3xl md:text-4xl font-bold text-center text-[#282041] mb-4">
-              Our Recruitment Services H1
+              Our Recruitment Services
             </h1>
             <p className="text-center text-gray-600 max-w-3xl mx-auto">
               We offer specialized recruitment services tailored to your specific industry and needs.
             </p>
 
             {/* Service Cards */}
-            <div className="grid md:grid-cols-3 gap-6 mt-12">
+            {/* <div className="grid md:grid-cols-3 gap-6 mt-12">
               <Card className="p-6 flex flex-col items-center text-center">
                 <div className="bg-[#282041] rounded-full p-2 mb-4">
                   <Circle className="h-6 w-6 text-white" />
@@ -63,12 +63,12 @@ export default function Services() {
                   Learn More
                 </Button>
               </Card>
-            </div>
+            </div> */}
           </div>
         </section>
 
         {/* Services Section 1 */}
-        <section className="py-12 md:py-16">
+        {/* <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
@@ -85,10 +85,10 @@ export default function Services() {
               <div className="bg-[#eaeaea] h-48 md:h-64 rounded-md"></div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Services Section 2 */}
-        <section className="py-12 md:py-16">
+        {/* <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
@@ -149,24 +149,31 @@ export default function Services() {
               <div className="bg-[#eaeaea] h-80 rounded-md"></div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* Services Section 3 */}
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="order-2 md:order-1 bg-[#eaeaea] h-80 rounded-md"></div>
+              <div className="order-2 md:order-1 bg-[#eaeaea] rounded-md">
+                <Image
+                    src="/amy-hirschi-K0c8ko3e6AA-unsplash.jpg" // Replace with your actual image path
+                    alt="Client banner"
+                    width={900} // Adjust as needed
+                    height={600} // Adjust as needed
+                    className="object-contain rounded"
+                  />
+              </div>
               <div className="order-1 md:order-2">
                 <h2 className="text-2xl md:text-3xl font-bold text-[#282041] mb-4">
-                  Recruitment Services
+                  Career Services
                   <br />
                   Offered by Lotus Lynx
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-                  rebirth.
+                Personalized support for job seekers, including résumé writing, LinkedIn optimization, and career coaching to help you stand out and succeed.
                 </p>
-                <Button variant="outline" className="rounded-full mb-8">
+                {/* <Button variant="outline" className="rounded-full mb-8">
                   <span className="flex items-center">
                     <svg
                       width="16"
@@ -185,8 +192,63 @@ export default function Services() {
                     </svg>
                     I'm a Job Seeker
                   </span>
-                </Button>
+                </Button> */}
 
+                {/* <div className="space-y-4">
+                  {[1, 2, 3, 4].map((item) => (
+                    <div key={item} className="flex items-center">
+                      <div className="bg-[#eaeaea] rounded-full h-4 w-4 mr-3"></div>
+                      <p className="text-gray-700">The name LotusLynx was inspired by two powerful</p>
+                    </div>
+                  ))}
+                </div> */}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="order-2 md:order-1 bg-[#eaeaea] rounded-md">
+              <Image
+                    src="/resume-genius-wNC266LJamg-unsplash.jpg" // Replace with your actual image path
+                    alt="Client banner"
+                    width={900} // Adjust as needed
+                    height={600} // Adjust as needed
+                    className="object-contain rounded"
+                  />
+              </div>
+              <div className="order-1 md:order-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#282041] mb-4">
+                  Recruiting Solutions
+                  <br />
+                  Offered by Lotus Lynx
+                </h2>
+                <p className="text-gray-700 mb-4">
+                End-to-end, full-cycle recruiting tailored to your company's needs — plus our unique Exploratory Candidate Service to proactively surface top talent.
+                </p>
+                {/* <Button variant="outline" className="rounded-full mb-8">
+                  <span className="flex items-center">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2"
+                    >
+                      <path
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    I'm a Job Seeker
+                  </span>
+                </Button> */}
+{/* 
                 <div className="space-y-4">
                   {[1, 2, 3, 4].map((item) => (
                     <div key={item} className="flex items-center">
@@ -194,7 +256,62 @@ export default function Services() {
                       <p className="text-gray-700">The name LotusLynx was inspired by two powerful</p>
                     </div>
                   ))}
-                </div>
+                </div> */}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="order-2 md:order-1 bg-[#eaeaea] rounded-md">
+              <Image
+                    src="/christina-wocintechchat-com-vzfgh3RAPzM-unsplash.jpg" // Replace with your actual image path
+                    alt="Client banner"
+                    width={900} // Adjust as needed
+                    height={600} // Adjust as needed
+                    className="object-contain rounded"
+                  />
+              </div>
+              <div className="order-1 md:order-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-[#282041] mb-4">
+                Talent Strategy & Hiring Support
+                  <br />
+                  Offered by Lotus Lynx
+                </h2>
+                <p className="text-gray-700 mb-4">
+                Strategic support for employers, offering hiring manager coaching, custom interview frameworks, and bespoke hiring plans designed to build high-performing teams.
+                </p>
+                {/* <Button variant="outline" className="rounded-full mb-8">
+                  <span className="flex items-center">
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2"
+                    >
+                      <path
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    I'm a Job Seeker
+                  </span>
+                </Button> */}
+{/* 
+                <div className="space-y-4">
+                  {[1, 2, 3, 4].map((item) => (
+                    <div key={item} className="flex items-center">
+                      <div className="bg-[#eaeaea] rounded-full h-4 w-4 mr-3"></div>
+                      <p className="text-gray-700">The name LotusLynx was inspired by two powerful</p>
+                    </div>
+                  ))}
+                </div> */}
               </div>
             </div>
           </div>

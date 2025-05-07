@@ -44,7 +44,7 @@ export default function ContactPage() {
             Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/employer" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+            <Link href="/become-client" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
               I'm an Employer
             </Link>
             <Link

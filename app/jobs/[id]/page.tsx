@@ -7,8 +7,8 @@ import { Briefcase, MapPin, DollarSign, Clock, ArrowLeft } from "lucide-react"
 import { useEffect, useState } from "react"
 import { use } from 'react'
 import Header from "@/components/ui/header"
-import { Footer } from "@/components/footer"
-
+import Footer from "@/components/ui/footer"
+import { ResumeUploadModal } from "@/components/resume-upload-modal"
 
 const fetchJobs = async () => {
   try {
@@ -32,6 +32,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
   const {id} = use(params);
 
   const [jobs, setJobs] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
       const fetchData = async () => {
@@ -106,7 +107,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           <section>
             <h2 className="text-xl font-semibold mb-3">Requirements</h2>
             <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-              {job.Requirements.split(',').map((req, index) => (
+              {job.Requirements.split('\n').map((req, index) => (
                 <li key={index}>{req}</li>
               ))}
             </ul>
@@ -115,16 +116,18 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           <section>
             <h2 className="text-xl font-semibold mb-3">Responsibilities</h2>
             <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-              {job.Responsibilities.split(',').map((resp, index) => (
+              {job.Responsibilities.split('\n').map((resp, index) => (
                 <li key={index}>{resp}</li>
               ))}
             </ul>
           </section>
 
           <div className="pt-4">
-            <Button size="lg" className="w-full sm:w-auto">
-              Apply Now
-            </Button>
+          <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">
+        Apply Now
+      </Button>
+      <ResumeUploadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
           </div>
         </CardContent>
       </Card>
