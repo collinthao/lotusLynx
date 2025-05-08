@@ -45,26 +45,26 @@ export default function PostJobForm(session: any) {
     };
 
     try {
-      const response = await fetch("https://6cn9lmzip5.execute-api.us-east-1.amazonaws.com/Dev", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(jobData),
-      });
+      const response = await fetch(
+        "https://6cn9lmzip5.execute-api.us-east-1.amazonaws.com/Dev",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(jobData),
+        }
+      );
 
       const result = await response.json();
 
       if (response.ok) {
         console.log("Job posted successfully:", result);
-        resetForm();
-        setIsSuccess(true);
-        setTimeout(() => setIsSuccess(false), 3000);
       } else {
         console.error("Error posting job:", result.error);
       }
     } catch (error) {
       console.error("Error:", error);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -140,7 +140,10 @@ export default function PostJobForm(session: any) {
       </div>
 
       <div>
-        <label htmlFor="jobDescription" className="block text-sm font-medium mb-1">
+        <label
+          htmlFor="jobDescription"
+          className="block text-sm font-medium mb-1"
+        >
           Job Description
         </label>
         <textarea
@@ -154,7 +157,10 @@ export default function PostJobForm(session: any) {
       </div>
 
       <div>
-        <label htmlFor="requirements" className="block text-sm font-medium mb-1">
+        <label
+          htmlFor="requirements"
+          className="block text-sm font-medium mb-1"
+        >
           Requirements
         </label>
         <textarea
@@ -167,7 +173,10 @@ export default function PostJobForm(session: any) {
       </div>
 
       <div>
-        <label htmlFor="responsibilities" className="block text-sm font-medium mb-1">
+        <label
+          htmlFor="responsibilities"
+          className="block text-sm font-medium mb-1"
+        >
           Responsibilities
         </label>
         <textarea
@@ -181,22 +190,9 @@ export default function PostJobForm(session: any) {
 
       <button
         type="submit"
-        className="w-full bg-[#282041] text-white py-2 rounded-md flex items-center justify-center gap-2"
-        disabled={isSubmitting || isSuccess}
+        className="w-full bg-[#282041] text-white py-2 rounded-md"
       >
-        {isSubmitting ? (
-          <>
-            <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            <span>Posting...</span>
-          </>
-        ) : isSuccess ? (
-          <>
-            <Check className="w-4 h-4" />
-            Posted!
-          </>
-        ) : (
-          "Post Job"
-        )}
+        Post Job
       </button>
     </form>
   );
