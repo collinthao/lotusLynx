@@ -25,7 +25,7 @@ export function ContactInfo() {
           <Phone className="h-5 w-5 text-primary flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-medium">Phone</h3>
-            <p className="text-gray-600">+1 262-234-5467</p>
+            <p className="text-gray-600">+1 815-616-7384</p>
           </div>
         </div>
 

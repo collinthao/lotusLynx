@@ -12,7 +12,7 @@ const founders = [
   },
   {
     "Name": "Kevin McKenzie",
-    "Role": "Managing Partner",
+    "Role": "Director of Operations & Strategy",
     "Link": "",
     "Image": './default_picture.webp'
   },
@@ -28,7 +28,7 @@ export default function AboutPage() {
       <main className="flex-grow">
         {/* About Section */}
         <section className="container mx-auto px-4 py-12 text-center">
-          <h1 className="text-4xl font-bold text-[#282041] mb-4">About Lotus Lynx</h1>
+          <h1 className="text-4xl font-bold text-[#282041] mb-4">About LotusLynx</h1>
           <p className="max-w-4xl mx-auto text-gray-700">
             We offer specialized recruitment services tailored to your specific industry and needs. We offer specialized
             recruitment services tailored to your specific industry and needs. We offer specialized recruitment services
@@ -50,8 +50,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl font-bold text-[#282041] mb-4">Mission</h2>
               <p className="text-gray-700">
-              The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-              rebirth.
+              At LotusLynx, we specialize in connecting top talent with outstanding companies. As a full-service recruitment agency, we provide tailored hiring solutions across a wide range of industries. Our mission is to simplify the recruitment process, delivering qualified, motivated candidates who align with your business goals and company culture.
               </p>
             </div>
           </div>
@@ -70,10 +69,9 @@ export default function AboutPage() {
               />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-[#282041] mb-4">Heading</h2>
+              <h2 className="text-3xl font-bold text-[#282041] mb-4">Vision</h2>
               <p className="text-gray-700">
-                The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-                rebirth.
+              To be the most trusted and innovative recruitment partner, empowering businesses to thrive and individuals to achieve their full potential through meaningful career connections.
               </p>
             </div>
           </div>

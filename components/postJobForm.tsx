@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import { Check } from "lucide-react"; // Optional: icon for success
 
 export default function PostJobForm(session: any) {
   const [JobTitle, setJobTitle] = useState("");
@@ -9,9 +12,24 @@ export default function PostJobForm(session: any) {
   const [Description, setJobDescription] = useState("");
   const [Requirements, setRequirements] = useState("");
   const [Responsibilities, setResponsibilities] = useState("");
-  // Handle form submit
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const resetForm = () => {
+    setJobTitle("");
+    setCompany("");
+    setLocation("");
+    setJobType("");
+    setSalaryRange("");
+    setJobDescription("");
+    setRequirements("");
+    setResponsibilities("");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const Session = session.session;
     console.log(Session);
     const jobData = {
@@ -23,27 +41,30 @@ export default function PostJobForm(session: any) {
       Description,
       Requirements,
       Responsibilities,
-      Session
+      Session,
     };
 
-    // Post job data to the backend
     try {
-      const response = await fetch('https://6cn9lmzip5.execute-api.us-east-1.amazonaws.com/Dev', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("https://6cn9lmzip5.execute-api.us-east-1.amazonaws.com/Dev", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(jobData),
       });
 
       const result = await response.json();
+
       if (response.ok) {
-        console.log('Job posted successfully:', result);
+        console.log("Job posted successfully:", result);
+        resetForm();
+        setIsSuccess(true);
+        setTimeout(() => setIsSuccess(false), 3000);
       } else {
-        console.error('Error posting job:', result.error);
+        console.error("Error posting job:", result.error);
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -59,6 +80,7 @@ export default function PostJobForm(session: any) {
           value={JobTitle}
           onChange={(e) => setJobTitle(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
+          required
         />
       </div>
 
@@ -72,6 +94,7 @@ export default function PostJobForm(session: any) {
           value={CompanyName}
           onChange={(e) => setCompany(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
+          required
         />
       </div>
 
@@ -85,6 +108,7 @@ export default function PostJobForm(session: any) {
           value={Location}
           onChange={(e) => setLocation(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
+          required
         />
       </div>
 
@@ -98,6 +122,7 @@ export default function PostJobForm(session: any) {
           value={JobType}
           onChange={(e) => setJobType(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
+          required
         />
       </div>
 
@@ -124,6 +149,7 @@ export default function PostJobForm(session: any) {
           value={Description}
           onChange={(e) => setJobDescription(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
+          required
         />
       </div>
 
@@ -153,8 +179,24 @@ export default function PostJobForm(session: any) {
         />
       </div>
 
-      <button type="submit" className="w-full bg-[#282041] text-white py-2 rounded-md">
-        Post Job
+      <button
+        type="submit"
+        className="w-full bg-[#282041] text-white py-2 rounded-md flex items-center justify-center gap-2"
+        disabled={isSubmitting || isSuccess}
+      >
+        {isSubmitting ? (
+          <>
+            <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <span>Posting...</span>
+          </>
+        ) : isSuccess ? (
+          <>
+            <Check className="w-4 h-4" />
+            Posted!
+          </>
+        ) : (
+          "Post Job"
+        )}
       </button>
     </form>
   );

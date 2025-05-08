@@ -24,15 +24,15 @@ const services =
 [
   {
     "Name": "Recruiting Solutions",
-    "Description": "Lorem Ipsum Dolor Sit Amet"
+    "Description": "End-to-end, full-cycle recruiting tailored to your company's needs — plus our unique Exploratory Candidate Service to proactively surface top talent."
   } , 
   {
     "Name": "Career Services",
-    "Description": "Lorem Ipsum Dolor Sit Amet"
+    "Description": "Personalized support for job seekers, including résumé writing, LinkedIn optimization, and career coaching to help you stand out and succeed."
   } , 
   {
     "Name": "Talent Strategy & Hiring Support",
-    "Description": "Lorem Ipsum Dolor Sit Amet"
+    "Description": "Strategic support for employers, offering hiring manager coaching, custom interview frameworks, and bespoke hiring plans designed to build high-performing teams."
   }
 ];
 
@@ -89,10 +89,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-[#282041]">Recruitment Services Offered by Lotus Lynx</h2>
+              <h2 className="text-3xl font-bold text-[#282041]">Recruitment Services Offered by LotusLynx</h2>
               <p className="text-gray-700">
-                The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-                rebirth.
+              LotusLynx is a full-service recruiting agency that connects top talent with companies across various industries, from skilled labor to executive leadership. 
               </p>
             </div>
             <div>
@@ -125,10 +124,9 @@ export default function Home() {
               />
             </div>
             <div className="space-y-6 order-1 md:order-2">
-              <h2 className="text-3xl font-bold text-[#282041]">Recruitment Services Offered by Lotus Lynx</h2>
+              <h2 className="text-3xl font-bold text-[#282041]">Recruitment Services Offered by LotusLynx</h2>
               <p className="text-gray-700">
-                The name LotusLynx was inspired by two powerful symbols: the lotus flower, representing growth and
-                rebirth.
+              LotusLynx takes a consultative approach to hiring by identifying challenges, streamlining processes, and improving talent acquisition strategies. Whether you need standalone consulting to refine your internal hiring approach or a hands-on recruiting partner, LotusLynx tailors its services to fit your needs. Our full-service approach includes interview coaching, structured interview guidance, offer extensions, reference checks, onboarding support, and much more to help you build stronger teams.
               </p>
             </div>
           </div>
@@ -140,7 +138,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="space-y-8">
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="text-3xl font-bold text-[#282041]">Our Recruitment Services H3</h2>
+              <h2 className="text-3xl font-bold text-[#282041]">Our Recruitment Services</h2>
               <p className="mt-4 text-gray-600">
                 We offer specialized recruitment services tailored to your specific industry and needs.
               </p>
@@ -154,7 +152,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold mb-4">{services[i]["Name"]}</h3>
                   <p className="text-gray-600 text-sm mb-6">
-                    Find top-tier executives and leaders for your organization with our specialized search process.
+                    {services[i]["Description"]}
                   </p>
                   <Link href="/services" className="border px-6 py-3 rounded-md text-[#282041] font-medium hover:underline">
                     Learn More

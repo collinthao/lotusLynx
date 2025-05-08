@@ -89,7 +89,7 @@ export default function RecruiterDashboard() {
           <div className="border rounded-lg p-6">
             <h2 className="text-lg font-semibold mb-4">Post a New Job</h2>
 
-            {!Session && <PostJobForm session={Session} />}
+            {Session && <PostJobForm session={Session} />}
           </div>
 
           {/* Job Listings */}
