@@ -12,11 +12,11 @@ export function ContactInfo() {
           <div>
             <h3 className="font-medium">Address</h3>
             <p className="text-gray-600">
-              123 Recruitment St
+              {/* 123 Recruitment St
               <br />
               Business District
-              <br />
-              City, State 12345
+              <br /> */}
+              Freeport, Illinois 61032
             </p>
           </div>
         </div>

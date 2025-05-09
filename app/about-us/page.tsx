@@ -6,7 +6,7 @@ import Footer from "@/components/ui/footer"
 const founders = [
   {
     "Name": "Ashley Bender",
-    "Role": "Founder & CEO",
+    "Role": "Founder/Principal Recruiter",
     "Link": "https://www.linkedin.com/in/ashley-bender-6730b578/",
     "Image": './ashley_headshot.png'
   },

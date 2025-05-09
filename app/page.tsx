@@ -7,16 +7,18 @@ import Stats from "@/components/ui/stats"
 
 const testimonials = [
   {
-    "Name": "Michael Prescher",
-    "Position": "Active Senior DevOps Engineer",
-    "Company": "Jewelers Mutual Group",
-    "Testimonial": `I am delighted to recommend Ashley and her team for their exceptional work in finding me opportunities and preparing me for interviews. Ashley’s dedication to communication and relationship-building truly set her apart. She took the time to understand my needs and advocate for me as an investment, ensuring I was well-prepared for every opportunity.` 
+    "Name": "Tiara Young",
+    "Position": "Cyber Security Consultant",
+    "Company": "TWW",
+    "Testimonial": `I’m incredibly grateful for the amazing support I received from Ashley Bender! From our first conversation, she was attentive, encouraging, and truly invested in helping me find the right opportunity. Thanks to her guidance and dedication, I successfully landed my role as a Senior Project Manager. She made the entire process smooth, efficient, and even enjoyable. If you’re looking for a recruiter who genuinely cares about your success and goes the extra mile, I highly recommend working with her! Thank you Ashley for your professionalism.` 
   },
   {
-    "Name": "Svetlana Barilova",
-    "Position": "Automation SQA Engineer",
-    "Company": "Brady Corporation",
-    "Testimonial": `I can strongly recommend Ashley to work with. She’s very responsible, fast, professional, knowledgeable, attentive to details. Thanks to her, I found my new position very fast.` 
+    "Name": "Rosa Vento",
+    "Position": "",
+    "Company": "",
+    "Testimonial": `I had the pleasure of working with Ashley Bender during my recent career journey, and I cannot recommend her highly enough. Ashley is a true professional in every sense—her ability to identify and connect with top talent is unparalleled, and her passion for helping candidates find the perfect fit shines through in everything she does.
+From our very first conversation, Ashley impressed me with her commitment to aligning my skills with the right opportunities. She is insightful, approachable, and incredibly supportive, making what can be a stressful process feel seamless and exciting.
+Ashley doesn’t just find candidates; she invests in them, taking the time to understand their strengths, aspirations, and values. Her expertise and dedication truly make her a standout in the recruiting space. Anyone fortunate enough to work with Ashley will find a recruiter who goes above and beyond to deliver results with care and professionalism.` 
   }
 ];
 
@@ -199,7 +201,7 @@ export default function Home() {
             Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="//become-client" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
+            <Link href="/become-client" className="bg-[#282041] text-white px-6 py-3 rounded-md font-medium">
               I'm an Employer
             </Link>
             <Link

@@ -1,13 +1,15 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer() {
   const navItems = [
     { label: "Job List", href: "/job-listings" },
     { label: "Services", href: "/services" },
-    { label: "About", href: "/about" },
+    { label: "About", href: "/about-us" },
     { label: "Contact", href: "/contact" },
-  ]
+  ];
 
   return (
     <footer className="bg-primary text-white">
@@ -28,11 +30,24 @@ export function Footer() {
           ))}
         </nav>
 
+        {/* Social Media Icons */}
+        <div className="flex justify-center gap-6 mb-8">
+          <Link href="https://www.linkedin.com" target="_blank">
+            <FontAwesomeIcon icon={faLinkedin} className="text-xl hover:text-blue-500 transition" />
+          </Link>
+          <Link href="https://www.youtube.com" target="_blank">
+            <FontAwesomeIcon icon={faYoutube} className="text-xl hover:text-red-500 transition" />
+          </Link>
+          <Link href="https://www.instagram.com" target="_blank">
+            <FontAwesomeIcon icon={faInstagram} className="text-xl hover:text-pink-500 transition" />
+          </Link>
+        </div>
+
         <div className="text-center text-sm text-gray-300">
           <p>Copyright © 2025 Lotus Lynx. All rights reserved. Privacy Policy.</p>
           <p>All rights reserved. Privacy Policy.</p>
         </div>
       </div>
     </footer>
-  )
+  );
 }
