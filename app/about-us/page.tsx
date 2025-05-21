@@ -13,8 +13,8 @@ const founders = [
   {
     "Name": "Kevin McKenzie",
     "Role": "Director of Operations & Strategy",
-    "Link": "",
-    "Image": './default_picture.webp'
+    "Link": "https://www.linkedin.com/in/kevin-mckenzie-557b2434/",
+    "Image": './Portion2.png'
   },
 ]
 
@@ -28,13 +28,23 @@ export default function AboutPage() {
       <main className="flex-grow">
         {/* About Section */}
         <section className="container mx-auto px-4 py-12 text-center">
-          <h1 className="text-4xl font-bold text-[#282041] mb-4">About LotusLynx</h1>
-          <p className="max-w-4xl mx-auto text-gray-700">
-            We offer specialized recruitment services tailored to your specific industry and needs. We offer specialized
-            recruitment services tailored to your specific industry and needs. We offer specialized recruitment services
-            tailored to your specific industry and needs.
-          </p>
-        </section>
+  <h1 className="text-4xl font-bold text-[#282041] mb-4">About LotusLynx: The Lotus Lynx Story</h1>
+  <p className="max-w-4xl mx-auto text-gray-700 mb-8">
+  The Missing Link Between Talent and Opportunity
+  </p>
+
+  <h2 className="text-3xl font-bold text-[#282041] mb-4">Who We Are</h2>
+  <p className="max-w-4xl mx-auto text-gray-700">
+    LotusLynx isn’t your typical recruiting firm, and that’s by design. After over a decade in professional recruiting, our founder Ashley Bender decided to build something different: a boutique agency focused on real connections, not transactions.
+    <br /><br />
+    After years of success in the recruiting world, she realized something was missing: a human-centered approach that puts people before quotas. With that vision in mind, she launched LotusLynx — a firm built on the belief that recruiting can be personal, principled, and powerful without sacrificing results.
+    <br /><br />
+    We offer recruiting, career services, and strategic hiring solutions built on relationships, honesty, and personalized service. From technical roles to leadership positions, and everything in between, we partner with both clients and candidates to make hiring feel more meaningful, empowering, and efficient.
+    <br /><br />
+    Whether you're looking to build a stronger team or take the next step in your career, we’re here to help you do it with purpose.
+  </p>
+</section>
+
 
         <section className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -50,7 +60,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl font-bold text-[#282041] mb-4">Mission</h2>
               <p className="text-gray-700">
-              At LotusLynx, we specialize in connecting top talent with outstanding companies. As a full-service recruitment agency, we provide tailored hiring solutions across a wide range of industries. Our mission is to simplify the recruitment process, delivering qualified, motivated candidates who align with your business goals and company culture.
+              At LotusLynx, our mission is to bring the human touch back to hiring.  We’re here to create thoughtful connections, deliver strategic results, and make the recruitment process easier, more personal, and more impactful for everyone involved.
               </p>
             </div>
           </div>
@@ -58,24 +68,44 @@ export default function AboutPage() {
 
         {/* Heading Section */}
         <section className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-              <Image
-                src="./ashley_family.jpg"
-                alt="Company Image"
-                width={400}
-                height={300}
-                className="w-full h-auto bg-[#eaeaea] rounded"
-              />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-[#282041] mb-4">Vision</h2>
-              <p className="text-gray-700">
-              To be the most trusted and innovative recruitment partner, empowering businesses to thrive and individuals to achieve their full potential through meaningful career connections.
-              </p>
-            </div>
-          </div>
-        </section>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <div>
+      <Image
+        src="./ashley_family.jpg"
+        alt="Company Image"
+        width={400}
+        height={300}
+        className="w-full h-auto bg-[#eaeaea] rounded"
+      />
+    </div>
+    <div>
+      <h2 className="text-3xl font-bold text-[#282041] mb-6">Values</h2>
+      <ul className="list-none space-y-4 text-gray-700">
+        <li>
+          <strong>Authenticity</strong><br />
+          We build trust through transparency—being clear, consistent, and real in everything we do.
+        </li>
+        <li>
+          <strong>Connection</strong><br />
+          Relationships come first. Hiring and career moves should never feel like a cold transaction.
+        </li>
+        <li>
+          <strong>Strategy</strong><br />
+          We don’t do one-size-fits-all. Every solution is designed with purpose and precision.
+        </li>
+        <li>
+          <strong>Empowerment</strong><br />
+          We exist to help people take control of their growth, whether they’re building a business or building a future.
+        </li>
+        <li>
+          <strong>Flexibility</strong><br />
+          We work how today’s world works—with adaptability, empathy, and a no red-tape approach.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 
         {/* Team Section */}
         <section className="container mx-auto px-4 py-12 text-center">

@@ -6,6 +6,19 @@ import { Circle } from "lucide-react"
 import Header from "@/components/ui/header"
 import Footer from "@/components/ui/footer"
 
+const services = [
+  "Resume Writing: Crafting compelling resumes that highlight your strengths.",
+  "LinkedIn Optimization: Enhancing your online presence to attract opportunities.",
+  "Career Coaching: Providing guidance to navigate your career path confidently.",
+];
+
+const support = 
+[
+  "Hiring Manager Coaching: Equipping your team with effective hiring practices.",
+  "Custom Interview Frameworks: Designing structured interviews to identify the best candidates.",
+  "Bespoke Hiring Plans: Creating tailored strategies that align with your organizational goals.",
+];
+
 export default function Services() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -20,7 +33,7 @@ export default function Services() {
               Our Recruitment Services
             </h1>
             <p className="text-center text-gray-600 max-w-3xl mx-auto">
-              We offer specialized recruitment services tailored to your specific industry and needs.
+            At LotusLynx, we redefine recruitment by placing relationships at the heart of hiring. We offer personalized, strategic services designed to meet the unique needs of both employers and job seekers.
             </p>
 
             {/* Service Cards */}
@@ -171,8 +184,16 @@ export default function Services() {
                   Offered by Lotus Lynx
                 </h2>
                 <p className="text-gray-700 mb-4">
-                Personalized support for job seekers, including résumé writing, LinkedIn optimization, and career coaching to help you stand out and succeed.
+                Empowering job seekers with personalized support, we offer:
                 </p>
+                <div className="space-y-4">
+                   {services.map((item) => (
+                     <div key={item} className="flex items-center">
+                       <div className="bg-[#eaeaea] rounded-full h-4 w-4 mr-3"></div>
+                       <p className="text-gray-700">{item}</p>
+                     </div>
+                   ))}
+                 </div>
                 {/* <Button variant="outline" className="rounded-full mb-8">
                   <span className="flex items-center">
                     <svg
@@ -226,7 +247,7 @@ export default function Services() {
                   Offered by Lotus Lynx
                 </h2>
                 <p className="text-gray-700 mb-4">
-                End-to-end, full-cycle recruiting tailored to your company's needs — plus our unique Exploratory Candidate Service to proactively surface top talent.
+                From entry level to executive leadership, we provide end-to-end, full cycle recruiting tailored to your company's needs. Our unique Exploratory Candidate Service proactively surfaces top talent, ensuring you find the right fit before the need becomes urgent.
                 </p>
                 {/* <Button variant="outline" className="rounded-full mb-8">
                   <span className="flex items-center">
@@ -248,15 +269,6 @@ export default function Services() {
                     I'm a Job Seeker
                   </span>
                 </Button> */}
-{/* 
-                <div className="space-y-4">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="flex items-center">
-                      <div className="bg-[#eaeaea] rounded-full h-4 w-4 mr-3"></div>
-                      <p className="text-gray-700">The name LotusLynx was inspired by two powerful</p>
-                    </div>
-                  ))}
-                </div> */}
               </div>
             </div>
           </div>
@@ -281,7 +293,7 @@ export default function Services() {
                   Offered by Lotus Lynx
                 </h2>
                 <p className="text-gray-700 mb-4">
-                Strategic support for employers, offering hiring manager coaching, custom interview frameworks, and bespoke hiring plans designed to build high-performing teams.
+                We partner with employers to build high performing teams through:
                 </p>
                 {/* <Button variant="outline" className="rounded-full mb-8">
                   <span className="flex items-center">
@@ -303,15 +315,18 @@ export default function Services() {
                     I'm a Job Seeker
                   </span>
                 </Button> */}
-{/* 
+
                 <div className="space-y-4">
-                  {[1, 2, 3, 4].map((item) => (
+                  {support.map((item) => (
                     <div key={item} className="flex items-center">
                       <div className="bg-[#eaeaea] rounded-full h-4 w-4 mr-3"></div>
-                      <p className="text-gray-700">The name LotusLynx was inspired by two powerful</p>
+                      <p className="text-gray-700">{item}</p>
                     </div>
                   ))}
-                </div> */}
+                </div>
+                {/* <p className="text-gray-700 mb-4">
+                Ready to find your perfect match? Whether you're looking to hire top talent or find your dream job, we're here to help you succeed.
+                </p> */}
               </div>
             </div>
           </div>
