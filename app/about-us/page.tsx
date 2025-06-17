@@ -10,12 +10,12 @@ const founders = [
     "Link": "https://www.linkedin.com/in/ashley-bender-6730b578/",
     "Image": './ashley_headshot.png'
   },
-  {
-    "Name": "Kevin McKenzie",
-    "Role": "Director of Operations & Strategy",
-    "Link": "https://www.linkedin.com/in/kevin-mckenzie-557b2434/",
-    "Image": './Portion2.png'
-  },
+  // {
+  //   "Name": "Kevin McKenzie",
+  //   "Role": "Director of Operations & Strategy",
+  //   "Link": "https://www.linkedin.com/in/kevin-mckenzie-557b2434/",
+  //   "Image": './Portion2.png'
+  // },
 ]
 
 export default function AboutPage() {
@@ -111,7 +111,7 @@ export default function AboutPage() {
         <section className="container mx-auto px-4 py-12 text-center">
   <h2 className="text-3xl font-bold text-[#282041] mb-12">Our Team</h2>
   <div className="flex flex-wrap justify-center gap-36">
-    {[0, 1].map((i) => (
+    {[0].map((i) => (
       <div key={i} className="flex flex-col items-center">
         <a href={founders[i]["Link"]} target="_blank" rel="noopener noreferrer">
           <img
