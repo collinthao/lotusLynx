@@ -58,7 +58,7 @@ export default function JobListings() {
       <Header/>
     <div className="container mx-auto py-8 px-4">
       <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Job Listings</h1>
+        <h1 className="text-3xl font-bold mb-2">Current Openings</h1>
         <p className="text-muted-foreground">Find your perfect role from our curated job listings</p>
       </header>
 

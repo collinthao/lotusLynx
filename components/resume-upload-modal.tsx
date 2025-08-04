@@ -166,116 +166,125 @@ export function ResumeUploadModal({ isOpen, onClose }: ResumeUploadModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 py-4">
-          <div className="grid w-full gap-1.5">
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="John Smith"
-              required
-            />
+        {/* Submission Confirmation */}
+        {isSuccess ? (
+          <div className="flex flex-col items-center justify-center py-8">
+            <Check className="h-10 w-10 text-green-600 mb-2" />
+            <p className="text-lg font-semibold text-green-700 mb-1">Resume Submitted!</p>
+            <p className="text-gray-600 text-center">Thank you for submitting your resume. We'll be in touch soon.</p>
           </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4 py-4">
+            <div className="grid w-full gap-1.5">
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="John Smith"
+                required
+              />
+            </div>
 
-          <div className="grid w-full gap-1.5">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="john@example.com"
-              required
-            />
-          </div>
+            <div className="grid w-full gap-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="john@example.com"
+                required
+              />
+            </div>
 
-          <div className="grid w-full gap-1.5">
-            <Label htmlFor="resume">Resume</Label>
-            <input
-              ref={fileInputRef}
-              id="resume"
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              className="hidden"
-            />
+            <div className="grid w-full gap-1.5">
+              <Label htmlFor="resume">Resume</Label>
+              <input
+                ref={fileInputRef}
+                id="resume"
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                className="hidden"
+              />
 
-            {!file ? (
-              <div
-                className={cn(
-                  "border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition-colors",
-                  isDragging
-                    ? "border-primary bg-primary/5"
-                    : "border-gray-300 hover:border-primary/50"
-                )}
-                onClick={triggerFileInput}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-                onDrop={handleDrop}
-              >
-                <Upload className="h-10 w-10 mx-auto mb-2 text-gray-400" />
-                <p className="text-sm font-medium">
-                  Drag and drop your resume here or click to browse
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Supports PDF, DOC, DOCX (Max 5MB)
-                </p>
-              </div>
-            ) : (
-              <div className="flex items-center justify-between p-3 border rounded-md bg-gray-50">
-                <div className="flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium truncate max-w-[180px]">
-                    {file.name}
-                  </span>
-                </div>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={removeFile}
-                  className="h-8 w-8 p-0"
+              {!file ? (
+                <div
+                  className={cn(
+                    "border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition-colors",
+                    isDragging
+                      ? "border-primary bg-primary/5"
+                      : "border-gray-300 hover:border-primary/50"
+                  )}
+                  onClick={triggerFileInput}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
                 >
-                  <X className="h-4 w-4" />
-                  <span className="sr-only">Remove file</span>
-                </Button>
-              </div>
-            )}
-
-            {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
-          </div>
-
-          <DialogFooter className="pt-4">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={onClose}
-              disabled={isSubmitting}
-            >
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting || isSuccess}
-              className="min-w-[100px]"
-            >
-              {isSubmitting ? (
-                <span className="flex items-center gap-1">
-                  <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Uploading...</span>
-                </span>
-              ) : isSuccess ? (
-                <span className="flex items-center gap-1">
-                  <Check className="h-4 w-4" />
-                  <span>Submitted!</span>
-                </span>
+                  <Upload className="h-10 w-10 mx-auto mb-2 text-gray-400" />
+                  <p className="text-sm font-medium">
+                    Drag and drop your resume here or click to browse
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Supports PDF, DOC, DOCX (Max 5MB)
+                  </p>
+                </div>
               ) : (
-                "Submit Resume"
+                <div className="flex items-center justify-between p-3 border rounded-md bg-gray-50">
+                  <div className="flex items-center gap-2">
+                    <FileText className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium truncate max-w-[180px]">
+                      {file.name}
+                    </span>
+                  </div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={removeFile}
+                    className="h-8 w-8 p-0"
+                  >
+                    <X className="h-4 w-4" />
+                    <span className="sr-only">Remove file</span>
+                  </Button>
+                </div>
               )}
-            </Button>
-          </DialogFooter>
-        </form>
+
+              {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+            </div>
+
+            <DialogFooter className="pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onClose}
+                disabled={isSubmitting}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting || isSuccess}
+                className="min-w-[100px]"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center gap-1">
+                    <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <span>Uploading...</span>
+                  </span>
+                ) : isSuccess ? (
+                  <span className="flex items-center gap-1">
+                    <Check className="h-4 w-4" />
+                    <span>Submitted!</span>
+                  </span>
+                ) : (
+                  "Submit Resume"
+                )}
+              </Button>
+            </DialogFooter>
+          </form>
+        )}
       </DialogContent>
     </Dialog>
   );

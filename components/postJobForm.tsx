@@ -23,6 +23,11 @@ export default function PostJobForm(session: any ) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Rich text handler for Job Description
+  const handleDescriptionChange = (e: React.FormEvent<HTMLDivElement>) => {
+    setFormData((prev) => ({ ...prev, Description: e.currentTarget.innerHTML }));
+  };
+
   const resetForm = () => {
     setFormData({
       JobTitle: "",
@@ -153,14 +158,16 @@ export default function PostJobForm(session: any ) {
         <label htmlFor="jobDescription" className="block text-sm font-medium mb-1">
           Job Description
         </label>
-        <textarea
+        {/* Rich Text Editor */}
+        <div
           id="jobDescription"
           name="Description"
-          rows={4}
-          value={formData.Description}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
+          contentEditable
+          className="w-full px-3 py-2 border rounded-md min-h-[100px] bg-white focus:outline-none"
+          onInput={handleDescriptionChange}
+          dangerouslySetInnerHTML={{ __html: formData.Description }}
           required
+          aria-required="true"
         />
       </div>
 

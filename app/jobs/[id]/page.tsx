@@ -52,7 +52,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
         <Link href="/">
           <Button>
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Job Listings
+            Back to Current Openings
           </Button>
         </Link>
       </div>
@@ -66,7 +66,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
       <Link href="/job-listings" className="inline-flex items-center mb-6">
         <Button variant="outline">
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Job Listings
+          Back to Current Openings
         </Button>
       </Link>
 

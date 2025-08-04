@@ -28,7 +28,7 @@ export default function AboutPage() {
       <main className="flex-grow">
         {/* About Section */}
         <section className="container mx-auto px-4 py-12 text-center">
-  <h1 className="text-4xl font-bold text-[#282041] mb-4">About LotusLynx: The Lotus Lynx Story</h1>
+  <h1 className="text-4xl font-bold text-[#282041] mb-4">About LotusLynx: The LotusLynx Story</h1>
   <p className="max-w-4xl mx-auto text-gray-700 mb-8">
   The Missing Link Between Talent and Opportunity
   </p>
