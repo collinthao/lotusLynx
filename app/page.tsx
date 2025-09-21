@@ -49,7 +49,7 @@ export default function Home() {
         <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight w-3/4">
-              Connecting Top Talent with Leading Employers
+              Connecting Top Talent with Leading Employers TEST
             </h1>
             <p className="text-lg w-3/4">
             The Missing Link Between Talent and Opportunity: A boutique talent firm redefining the recruitment experience
