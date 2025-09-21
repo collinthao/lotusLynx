@@ -6,11 +6,9 @@ function generateMD5Hash(data: string): string {
   return crypto.createHash("md5").update(data).digest("hex");
 }
 
-// 🔐 Called on login form submit
 export const handleSubmit = async (userName: string, password: string) => {
-  // ✅ Hashing using "username password" format
-  const raw = `${userName} ${password}`;
-  const Session = generateMD5Hash(raw);
+  // 👇 Use raw string directly — no hashing
+  const Session = `${userName} ${password}`;
 
   const payload = { Session };
 
@@ -29,15 +27,12 @@ export const handleSubmit = async (userName: string, password: string) => {
     const result = await response.json();
 
     if (response.ok) {
-      console.log("✅ Authentication Success:", result);
-      // 🔁 Redirect with session hash as query param
-      redirect(`/jobs-dashboard?session=${Session}`);
+      console.log("✅ Authenticated:", result);
+      redirect(`/jobs-dashboard?session=${encodeURIComponent(Session)}`);
     } else {
-      console.error("❌ Authentication Failed:", result.body);
-      // You could throw here or return an error to the client
+      console.error("❌ Authentication failed:", result.body || result);
     }
   } catch (error) {
-    console.error("❌ Error authenticating:", error);
-    // Optional: throw or notify
+    console.error("❌ Error:", error);
   }
 };
