@@ -1,18 +1,16 @@
 import crypto from "crypto";
 import { redirect } from "next/navigation";
 
-// ✅ MD5 hashing function — same logic as in Python
 function generateMD5Hash(data: string): string {
   return crypto.createHash("md5").update(data).digest("hex");
 }
 
-// 🔐 Called on login form submit
 export const handleSubmit = async (userName: string, password: string) => {
-  // ✅ Hashing using "username password" format
-  const raw = `${userName} ${password}`;
-  const Session = generateMD5Hash(raw);
+  const passwordHash = generateMD5Hash(password); // hash raw password
+  const sessionRaw = `${userName} ${passwordHash}`; // username + hashed password
+  const Session = generateMD5Hash(sessionRaw); // hash the whole string again
 
-  const payload = { Session };
+  const jobData = { Session };
 
   try {
     const response = await fetch(
@@ -22,22 +20,18 @@ export const handleSubmit = async (userName: string, password: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(jobData),
       }
     );
 
     const result = await response.json();
-
     if (response.ok) {
-      console.log("✅ Authentication Success:", result);
-      // 🔁 Redirect with session hash as query param
+      console.log("✅ Authenticated", result);
       redirect(`/jobs-dashboard?session=${Session}`);
     } else {
-      console.error("❌ Authentication Failed:", result.body);
-      // You could throw here or return an error to the client
+      console.error("❌ Authentication failed:", result.body);
     }
   } catch (error) {
-    console.error("❌ Error authenticating:", error);
-    // Optional: throw or notify
+    console.error("❌ Network error:", error);
   }
 };
