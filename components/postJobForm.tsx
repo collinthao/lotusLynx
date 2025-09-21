@@ -57,7 +57,7 @@ export default function PostJobForm({ session }: { session?: any }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(jobData),
+          body: JSON.stringify({ jobData, Session: session?.session }),
         }
       );
 
