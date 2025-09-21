@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react"; // Optional: icon for success
 
-export default function PostJobForm(session: any ) {
+export default function PostJobForm({ session }: { session?: any }) {
   const [formData, setFormData] = useState({
     JobTitle: "",
     CompanyName: "",
@@ -46,7 +46,7 @@ export default function PostJobForm(session: any ) {
     setIsSubmitting(true);
     const jobData = {
       ...formData,
-      Session: session.session, // You might want to include the session ID here if needed
+      Session: session?.session, // Safely access session if provided
     };
 
     try {
@@ -161,13 +161,15 @@ export default function PostJobForm(session: any ) {
         {/* Rich Text Editor */}
         <div
           id="jobDescription"
-          name="Description"
           contentEditable
           className="w-full px-3 py-2 border rounded-md min-h-[100px] bg-white focus:outline-none"
           onInput={handleDescriptionChange}
           dangerouslySetInnerHTML={{ __html: formData.Description }}
-          required
           aria-required="true"
+          role="textbox"
+          tabIndex={0}
+          // Add data attribute for custom validation
+          data-required="true"
         />
       </div>
 
@@ -203,6 +205,13 @@ export default function PostJobForm(session: any ) {
         type="submit"
         className="w-full bg-[#282041] text-white py-2 rounded-md"
         disabled={isSubmitting || isSuccess}
+        onClick={() => {
+          // Custom validation for contentEditable Description
+          const desc = formData.Description?.replace(/<[^>]+>/g, '').trim();
+          if (!desc) {
+            alert('Job Description is required.');
+          }
+        }}
       >
         {isSubmitting ? (
           <span className="flex items-center gap-1">
