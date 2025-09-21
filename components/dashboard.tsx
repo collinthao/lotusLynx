@@ -98,13 +98,13 @@ export const Dashboard = () => {
   const handleEditJob = async (jobId: string, updatedData: any) => {
     try {
       const response = await fetch(
-        `https://kjvlynirs3.execute-api.us-east-1.amazonaws.com/dev/jobs/JobId`,
+        `https://6cn9lmzip5.execute-api.us-east-1.amazonaws.com/Dev`,
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: "{\"ID\": \"45b88a31-7f05-4a3b-8bc7-25d8cc9075b1\"}",
+          body: JSON.stringify({ ID: jobId, ...updatedData }),
         }
       );
 
