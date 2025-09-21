@@ -256,6 +256,7 @@ export const Dashboard = () => {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
+                console.log(jobToEdit);
                 await handleEditJob(jobToEdit.ID, editFormData);
                 setJobToEdit(null);
               }}
