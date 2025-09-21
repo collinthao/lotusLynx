@@ -1,16 +1,15 @@
 import crypto from "crypto";
-import { redirect } from "next/navigation";
 
 function generateMD5Hash(data: string): string {
   return crypto.createHash("md5").update(data).digest("hex");
 }
 
 export const handleSubmit = async (userName: string, password: string) => {
-  const passwordHash = generateMD5Hash(password); // hash raw password
-  const sessionRaw = `${userName} ${passwordHash}`; // username + hashed password
-  const Session = generateMD5Hash(sessionRaw); // hash the whole string again
+  const passwordHash = generateMD5Hash(password); // hashed password
+  const sessionRaw = `${userName} ${passwordHash}`;
+  const Session = generateMD5Hash(sessionRaw);
 
-  const jobData = { Session };
+  const payload = { Session };
 
   try {
     const response = await fetch(
@@ -20,14 +19,17 @@ export const handleSubmit = async (userName: string, password: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(jobData),
+        body: JSON.stringify(payload),
       }
     );
 
     const result = await response.json();
+
     if (response.ok) {
-      console.log("✅ Authenticated", result);
-      redirect(`/jobs-dashboard?session=${Session}`);
+      console.log("✅ Authenticated:", result);
+
+      // ✅ Redirect from client
+      window.location.href = `/jobs-dashboard?session=${encodeURIComponent(Session)}`;
     } else {
       console.error("❌ Authentication failed:", result.body);
     }
