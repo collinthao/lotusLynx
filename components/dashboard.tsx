@@ -111,7 +111,7 @@ export const Dashboard = () => {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Edit successful:", result.message);
+        console.log("Edit successful:", result);
         const updated = await fetchJobs();
         setJobs(updated);
       } else {
