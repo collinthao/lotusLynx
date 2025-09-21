@@ -158,19 +158,15 @@ export default function PostJobForm({ session }: { session?: any }) {
         <label htmlFor="jobDescription" className="block text-sm font-medium mb-1">
           Job Description
         </label>
-        {/* Rich Text Editor */}
-        <div
-          id="jobDescription"
-          contentEditable
-          className="w-full px-3 py-2 border rounded-md min-h-[100px] bg-white focus:outline-none"
-          onInput={handleDescriptionChange}
-          dangerouslySetInnerHTML={{ __html: formData.Description }}
-          aria-required="true"
-          role="textbox"
-          tabIndex={0}
-          // Add data attribute for custom validation
-          data-required="true"
-        />
+<textarea
+  id="jobDescription"
+  name="Description"
+  rows={5}
+  value={formData.Description}
+  onChange={handleChange}
+  className="w-full px-3 py-2 border rounded-md"
+/>
+
       </div>
 
       <div>
@@ -205,13 +201,6 @@ export default function PostJobForm({ session }: { session?: any }) {
         type="submit"
         className="w-full bg-[#282041] text-white py-2 rounded-md"
         disabled={isSubmitting || isSuccess}
-        onClick={() => {
-          // Custom validation for contentEditable Description
-          const desc = formData.Description?.replace(/<[^>]+>/g, '').trim();
-          if (!desc) {
-            alert('Job Description is required.');
-          }
-        }}
       >
         {isSubmitting ? (
           <span className="flex items-center gap-1">
