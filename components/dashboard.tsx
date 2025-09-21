@@ -104,7 +104,7 @@ export const Dashboard = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ID: jobId, ...updatedData }),
+          body: JSON.stringify({ ID: jobId, Session: Session, ...updatedData }),
         }
       );
 
