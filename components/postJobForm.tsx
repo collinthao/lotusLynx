@@ -64,6 +64,7 @@ export default function PostJobForm({ session }: { session?: any }) {
       const result = await response.json();
 
       if (response.ok) {
+        console.log(session?.session);
         console.log("Job posted successfully:", result);
         setIsSuccess(true);
         resetForm(); // Reset form inputs
