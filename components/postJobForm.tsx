@@ -46,7 +46,7 @@ export default function PostJobForm({ session }: { session?: any }) {
     setIsSubmitting(true);
     const jobData = {
       ...formData,
-      Session: session?.session, // Safely access session if provided
+      Session: session, // Safely access session if provided
     };
 
     try {
