@@ -70,7 +70,7 @@ export const Dashboard = () => {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Delete successful:", result.message);
+        console.log("Delete successful:", result);
         const updated = await fetchJobs();
         setJobs(updated);
       } else {
