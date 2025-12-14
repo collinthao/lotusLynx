@@ -352,12 +352,12 @@ export const Dashboard = () => {
                         <input
                           type="radio"
                           name="editSalaryPeriod"
-                          value="Monthly"
-                          checked={editFormData.SalaryPeriod === "Monthly"}
-                          onChange={() => setEditFormData({ ...editFormData, SalaryPeriod: "Monthly" })}
+                          value="Yearly"
+                          checked={editFormData.SalaryPeriod === "Yearly"}
+                          onChange={() => setEditFormData({ ...editFormData, SalaryPeriod: "Yearly" })}
                           className="h-4 w-4"
                         />
-                        <span className="text-sm">Monthly</span>
+                        <span className="text-sm">Yearly</span>
                       </label>
 
                       <label className="inline-flex items-center gap-2">
