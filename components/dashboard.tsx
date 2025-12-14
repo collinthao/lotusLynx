@@ -13,7 +13,8 @@ export const Dashboard = () => {
     Company: "",
     Location: "",
     JobType: "",
-    Salary: "",
+    SalaryRange: "",
+    SalaryPeriod: "",
     DatePosted: "",
   });
   const [jobs, setJobs] = useState([]);
@@ -87,10 +88,11 @@ export const Dashboard = () => {
     setJobToEdit(job);
     setEditFormData({
       JobTitle: job.JobTitle,
-      Company: job.Company,
+      Company: job.Company || job.CompanyName || "",
       Location: job.Location,
-      JobType: job.JobType,
-      Salary: job.Salary,
+      JobType: job.JobType || "",
+      SalaryRange: job.SalaryRange ?? job.Salary ?? "",
+      SalaryPeriod: job.SalaryPeriod ?? "",
       DatePosted: job.DatePosted,
     });
   };
@@ -262,24 +264,126 @@ export const Dashboard = () => {
               }}
               className="space-y-4"
             >
-              {Object.keys(editFormData).map((field) => (
-                <div key={field}>
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
-                    {field.replace(/([A-Z])/g, " $1")}
-                  </label>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Job Title</label>
                   <input
                     type="text"
-                    value={editFormData[field]}
-                    onChange={(e) =>
-                      setEditFormData({
-                        ...editFormData,
-                        [field]: e.target.value,
-                      })
-                    }
+                    value={editFormData.JobTitle}
+                    onChange={(e) => setEditFormData({ ...editFormData, JobTitle: e.target.value })}
                     className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                   />
                 </div>
-              ))}
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Company</label>
+                  <input
+                    type="text"
+                    value={editFormData.Company}
+                    onChange={(e) => setEditFormData({ ...editFormData, Company: e.target.value })}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Location</label>
+                  <input
+                    type="text"
+                    value={editFormData.Location}
+                    onChange={(e) => setEditFormData({ ...editFormData, Location: e.target.value })}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                  <div className="flex gap-4">
+                    <label className="inline-flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="editJobType"
+                        value="Remote"
+                        checked={editFormData.JobType === "Remote"}
+                        onChange={() => setEditFormData({ ...editFormData, JobType: "Remote" })}
+                        className="h-4 w-4"
+                      />
+                      <span className="text-sm">Remote</span>
+                    </label>
+
+                    <label className="inline-flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="editJobType"
+                        value="Hybrid"
+                        checked={editFormData.JobType === "Hybrid"}
+                        onChange={() => setEditFormData({ ...editFormData, JobType: "Hybrid" })}
+                        className="h-4 w-4"
+                      />
+                      <span className="text-sm">Hybrid</span>
+                    </label>
+
+                    <label className="inline-flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="editJobType"
+                        value="Onsite"
+                        checked={editFormData.JobType === "Onsite"}
+                        onChange={() => setEditFormData({ ...editFormData, JobType: "Onsite" })}
+                        className="h-4 w-4"
+                      />
+                      <span className="text-sm">Onsite</span>
+                    </label>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Pay Range</label>
+                  <div className="flex gap-4 items-center">
+                    <input
+                      type="number"
+                      value={editFormData.SalaryRange}
+                      onChange={(e) => setEditFormData({ ...editFormData, SalaryRange: e.target.value })}
+                      className="w-1/3 mt-1 px-3 py-2 border rounded-md"
+                      placeholder="Amount"
+                      min={0}
+                    />
+
+                    <div className="flex gap-3">
+                      <label className="inline-flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="editSalaryPeriod"
+                          value="Monthly"
+                          checked={editFormData.SalaryPeriod === "Monthly"}
+                          onChange={() => setEditFormData({ ...editFormData, SalaryPeriod: "Monthly" })}
+                          className="h-4 w-4"
+                        />
+                        <span className="text-sm">Monthly</span>
+                      </label>
+
+                      <label className="inline-flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="editSalaryPeriod"
+                          value="Hourly"
+                          checked={editFormData.SalaryPeriod === "Hourly"}
+                          onChange={() => setEditFormData({ ...editFormData, SalaryPeriod: "Hourly" })}
+                          className="h-4 w-4"
+                        />
+                        <span className="text-sm">Hourly</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Date Posted</label>
+                  <input
+                    type="text"
+                    value={editFormData.DatePosted}
+                    onChange={(e) => setEditFormData({ ...editFormData, DatePosted: e.target.value })}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                  />
+                </div>
 
               <div className="flex justify-end space-x-3 pt-2">
                 <button

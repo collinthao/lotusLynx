@@ -82,7 +82,7 @@ export default function JobListings() {
                     </div>
                     <div className="flex items-center">
                       <DollarSign className="mr-1 h-4 w-4" />
-                      {job.SalaryRange}
+                      {job.SalaryRange + " / " + job.SalaryPeriod}
                     </div>
                     <div className="flex items-center">
                       <Clock className="mr-1 h-4 w-4" />

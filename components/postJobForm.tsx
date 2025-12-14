@@ -10,6 +10,8 @@ export default function PostJobForm({ session }: { session?: any }) {
     Location: "",
     JobType: "",
     SalaryRange: "",
+    SalaryPeriod: "",
+    Notes: "",
     Description: "",
     Requirements: "",
     Responsibilities: "",
@@ -35,6 +37,8 @@ export default function PostJobForm({ session }: { session?: any }) {
       Location: "",
       JobType: "",
       SalaryRange: "",
+      SalaryPeriod: "",
+      Notes: "",
       Description: "",
       Requirements: "",
       Responsibilities: "",
@@ -66,6 +70,7 @@ export default function PostJobForm({ session }: { session?: any }) {
       if (response.ok) {
         console.log(session);
         console.log("Job posted successfully:", result);
+        console.log("Job posted successfully:", jobData);
         setIsSuccess(true);
         resetForm(); // Reset form inputs
         setTimeout(() => setIsSuccess(false), 3000); // Hide success message after 3 seconds
@@ -97,21 +102,6 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
-        <label htmlFor="company" className="block text-sm font-medium mb-1">
-          Company
-        </label>
-        <input
-          type="text"
-          id="company"
-          name="CompanyName"
-          value={formData.CompanyName}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
-          required
-        />
-      </div>
-
-      <div>
         <label htmlFor="location" className="block text-sm font-medium mb-1">
           Location
         </label>
@@ -127,32 +117,104 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
-        <label htmlFor="jobType" className="block text-sm font-medium mb-1">
-          Job Type
-        </label>
-        <input
-          type="text"
-          id="jobType"
-          name="JobType"
-          value={formData.JobType}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
-          required
-        />
+        <label className="block text-sm font-medium mb-1">Type</label>
+        <div className="flex gap-4">
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="type-remote"
+              name="JobType"
+              value="Remote"
+              checked={formData.JobType === "Remote"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Remote</span>
+          </label>
+
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="type-hybrid"
+              name="JobType"
+              value="Hybrid"
+              checked={formData.JobType === "Hybrid"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Hybrid</span>
+          </label>
+
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="type-onsite"
+              name="JobType"
+              value="Onsite"
+              checked={formData.JobType === "Onsite"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Onsite</span>
+          </label>
+        </div>
       </div>
 
       <div>
-        <label htmlFor="salaryRange" className="block text-sm font-medium mb-1">
-          Salary Range
-        </label>
-        <input
-          type="text"
-          id="salaryRange"
-          name="SalaryRange"
-          value={formData.SalaryRange}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
-        />
+        <label className="block text-sm font-medium mb-1">Pay Range</label>
+        <div className="flex gap-4 items-center">
+          <input
+            type="number"
+            id="payAmount"
+            name="SalaryRange"
+            value={formData.SalaryRange}
+            onChange={handleChange}
+            className="w-1/3 px-3 py-2 border rounded-md"
+            placeholder="Amount"
+            min="0"
+          />
+
+          <div className="flex gap-3">
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                id="period-yearly"
+                name="SalaryPeriod"
+                value="Yearly"
+                checked={formData.SalaryPeriod === "Yearly"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm">Yearly</span>
+            </label>
+
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                id="period-monthly"
+                name="SalaryPeriod"
+                value="Monthly"
+                checked={formData.SalaryPeriod === "Monthly"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm">Monthly</span>
+            </label>
+
+            <label className="inline-flex items-center gap-2">
+              <input
+                type="radio"
+                id="period-hourly"
+                name="SalaryPeriod"
+                value="Hourly"
+                checked={formData.SalaryPeriod === "Hourly"}
+                onChange={handleChange}
+                className="h-4 w-4"
+              />
+              <span className="text-sm">Hourly</span>
+            </label>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -170,7 +232,7 @@ export default function PostJobForm({ session }: { session?: any }) {
 
       </div>
 
-      <div>
+      {/* <div>
         <label htmlFor="requirements" className="block text-sm font-medium mb-1">
           Requirements
         </label>
@@ -182,17 +244,17 @@ export default function PostJobForm({ session }: { session?: any }) {
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded-md"
         />
-      </div>
+      </div> */}
 
       <div>
         <label htmlFor="responsibilities" className="block text-sm font-medium mb-1">
-          Responsibilities
+          Notes
         </label>
         <textarea
-          id="responsibilities"
-          name="Responsibilities"
+          id="notes"
+          name="Notes"
           rows={3}
-          value={formData.Responsibilities}
+          value={formData.Notes}
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded-md"
         />

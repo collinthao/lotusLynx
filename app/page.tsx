@@ -83,24 +83,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* Certifications Section */}
-      <section className="py-12 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="space-y-6 text-center">
-            <h5 className="text-sm font-medium uppercase tracking-wider text-gray-500">CERTIFICATIONS</h5>
-            <h2 className="text-2xl font-bold text-[#282041]">Our Certifications</h2>
-          </div>
-          <div className="mt-8 flex justify-center items-center">
-            <Image
-              src="/SocialMedia_WBE_border.png"
-              alt="Certification badge - WBE"
-              width={220}
-              height={220}
-              className="object-contain"
-            />
-          </div>
-        </div>
-      </section>
 
       {/* Stats Section */}
       
@@ -210,7 +192,24 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
+            {/* Certifications Section */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="space-y-6 text-center">
+            <h5 className="text-sm font-medium uppercase tracking-wider text-gray-500">CERTIFICATIONS</h5>
+            <h2 className="text-2xl font-bold text-[#282041]">Our Certifications</h2>
+          </div>
+          <div className="mt-8 flex justify-center items-center">
+            <Image
+              src="/SocialMedia_WBE_border.png"
+              alt="Certification badge - WBE"
+              width={220}    
+              height={220}
+              className="object-contain"
+            />
+          </div>
+        </div>
+      </section>
       {/* CTA Section */}
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-4 text-center max-w-3xl">
