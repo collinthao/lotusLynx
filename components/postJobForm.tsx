@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Check } from "lucide-react"; // Optional: icon for success
 
 export default function PostJobForm({ session }: { session?: any }) {
@@ -9,8 +9,11 @@ export default function PostJobForm({ session }: { session?: any }) {
     CompanyName: "",
     Location: "",
     JobType: "",
-    SalaryRange: "",
+    EmploymentType: "",
+    SalaryMin: "",
+    SalaryMax: "",
     SalaryPeriod: "",
+    TotalCompensation: "",
     Notes: "",
     Description: "",
     Requirements: "",
@@ -19,15 +22,12 @@ export default function PostJobForm({ session }: { session?: any }) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const descriptionEditorRef = useRef<HTMLDivElement>(null);
+  const [showPayloadPreview, setShowPayloadPreview] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  // Rich text handler for Job Description
-  const handleDescriptionChange = (e: React.FormEvent<HTMLDivElement>) => {
-    setFormData((prev) => ({ ...prev, Description: e.currentTarget.innerHTML }));
   };
 
   const resetForm = () => {
@@ -36,8 +36,11 @@ export default function PostJobForm({ session }: { session?: any }) {
       CompanyName: "",
       Location: "",
       JobType: "",
-      SalaryRange: "",
+      EmploymentType: "",
+      SalaryMin: "",
+      SalaryMax: "",
       SalaryPeriod: "",
+      TotalCompensation: "",
       Notes: "",
       Description: "",
       Requirements: "",
@@ -48,10 +51,24 @@ export default function PostJobForm({ session }: { session?: any }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
+    // Capture HTML from contentEditable div
+    const descriptionHTML = descriptionEditorRef.current?.innerHTML || "";
+    // Compute SalaryRange for AWS backward compatibility
+    const salaryRangeComputed =
+      (formData.SalaryMin && formData.SalaryMax)
+        ? `${formData.SalaryMin}-${formData.SalaryMax}`
+        : "";
+    
     const jobData = {
       ...formData,
+      Description: descriptionHTML, // Use captured HTML
+      SalaryRange: salaryRangeComputed,
       Session: session, // Safely access session if provided
     };
+
+    // Log payload for quick verification
+    console.log("Submitting job payload:", jobData);
 
     try {
       const response = await fetch(
@@ -61,7 +78,8 @@ export default function PostJobForm({ session }: { session?: any }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ jobData, Session: session }),
+          // Send flat payload (no nested jobData) for AWS compatibility
+          body: JSON.stringify(jobData),
         }
       );
 
@@ -73,6 +91,9 @@ export default function PostJobForm({ session }: { session?: any }) {
         console.log("Job posted successfully:", jobData);
         setIsSuccess(true);
         resetForm(); // Reset form inputs
+        if (descriptionEditorRef.current) {
+          descriptionEditorRef.current.innerHTML = ""; // Clear rich text editor
+        }
         setTimeout(() => setIsSuccess(false), 3000); // Hide success message after 3 seconds
       } else {
         console.error("Error posting job:", result.error);
@@ -102,6 +123,21 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
+        <label htmlFor="companyName" className="block text-sm font-medium mb-1">
+          Company Name
+        </label>
+        <input
+          type="text"
+          id="companyName"
+          name="CompanyName"
+          value={formData.CompanyName}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded-md"
+          placeholder="e.g., Acme Corp"
+        />
+      </div>
+
+      <div>
         <label htmlFor="location" className="block text-sm font-medium mb-1">
           Location
         </label>
@@ -117,7 +153,7 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-1">Type</label>
+        <label className="block text-sm font-medium mb-1">Work Location</label>
         <div className="flex gap-4">
           <label className="inline-flex items-center gap-2">
             <input
@@ -161,18 +197,75 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
+        <label className="block text-sm font-medium mb-1">Employment Type</label>
+        <div className="flex gap-4">
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="employment-direct"
+              name="EmploymentType"
+              value="Direct Hire"
+              checked={formData.EmploymentType === "Direct Hire"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Direct Hire</span>
+          </label>
+
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="employment-contract"
+              name="EmploymentType"
+              value="Contract"
+              checked={formData.EmploymentType === "Contract"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Contract</span>
+          </label>
+
+          <label className="inline-flex items-center gap-2">
+            <input
+              type="radio"
+              id="employment-c2h"
+              name="EmploymentType"
+              value="Contract-to-Hire"
+              checked={formData.EmploymentType === "Contract-to-Hire"}
+              onChange={handleChange}
+              className="h-4 w-4"
+            />
+            <span className="text-sm">Contract-to-Hire</span>
+          </label>
+        </div>
+      </div>
+
+      <div>
         <label className="block text-sm font-medium mb-1">Pay Range</label>
-        <div className="flex gap-4 items-center">
-          <input
-            type="number"
-            id="payAmount"
-            name="SalaryRange"
-            value={formData.SalaryRange}
-            onChange={handleChange}
-            className="w-1/3 px-3 py-2 border rounded-md"
-            placeholder="Amount"
-            min="0"
-          />
+        <div className="flex flex-col gap-3">
+          <div className="flex gap-3 items-center">
+            <input
+              type="number"
+              id="salaryMin"
+              name="SalaryMin"
+              value={formData.SalaryMin}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-md"
+              placeholder="Min (e.g., 150000)"
+              min="0"
+            />
+            <span className="text-sm">to</span>
+            <input
+              type="number"
+              id="salaryMax"
+              name="SalaryMax"
+              value={formData.SalaryMax}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-md"
+              placeholder="Max (e.g., 160000)"
+              min="0"
+            />
+          </div>
 
           <div className="flex gap-3">
             <label className="inline-flex items-center gap-2">
@@ -218,18 +311,32 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
+        <label htmlFor="totalCompensation" className="block text-sm font-medium mb-1">
+          Total Compensation Details
+        </label>
+        <textarea
+          id="totalCompensation"
+          name="TotalCompensation"
+          rows={3}
+          value={formData.TotalCompensation}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded-md"
+          placeholder="Include details about bonus, equity, stock options, incentives, etc."
+        />
+      </div>
+
+      <div>
         <label htmlFor="jobDescription" className="block text-sm font-medium mb-1">
           Job Description
         </label>
-<textarea
-  id="jobDescription"
-  name="Description"
-  rows={5}
-  value={formData.Description}
-  onChange={handleChange}
-  className="w-full px-3 py-2 border rounded-md"
-/>
-
+        <div
+          ref={descriptionEditorRef}
+          id="jobDescription"
+          className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          contentEditable
+          suppressContentEditableWarning
+        />
+        <p className="mt-1 text-xs text-muted-foreground">Paste formatted text and it will be preserved.</p>
       </div>
 
       {/* <div>
@@ -259,6 +366,38 @@ export default function PostJobForm({ session }: { session?: any }) {
           className="w-full px-3 py-2 border rounded-md"
         />
       </div>
+
+      {/* Payload preview toggle */}
+      <div className="flex items-center justify-between">
+        <label className="inline-flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={showPayloadPreview}
+            onChange={(e) => setShowPayloadPreview(e.target.checked)}
+          />
+          Show payload preview
+        </label>
+      </div>
+
+      {showPayloadPreview && (
+        <div className="mt-2 border rounded-md p-3 bg-gray-50 overflow-auto max-h-[16rem]">
+          <pre className="text-xs">
+            {(() => {
+              const salaryRangeComputed = (formData.SalaryMin && formData.SalaryMax)
+                ? `${formData.SalaryMin}-${formData.SalaryMax}`
+                : "";
+              const descriptionHTML = descriptionEditorRef.current?.innerHTML || "";
+              const preview = {
+                ...formData,
+                Description: descriptionHTML,
+                SalaryRange: salaryRangeComputed,
+                Session: session,
+              };
+              return JSON.stringify(preview, null, 2);
+            })()}
+          </pre>
+        </div>
+      )}
 
       <button
         type="submit"

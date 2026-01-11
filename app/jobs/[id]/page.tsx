@@ -9,6 +9,7 @@ import { use } from 'react'
 import Header from "@/components/ui/header"
 import Footer from "@/components/ui/footer"
 import { ResumeUploadModal } from "@/components/resume-upload-modal"
+import DOMPurify from "dompurify"
 
 const fetchJobs = async () => {
   try {
@@ -87,9 +88,18 @@ export default function JobDetail({ params }: { params: { id: string } }) {
               <Briefcase className="mr-1 h-4 w-4" />
               {job.JobType}
             </div>
+            {job.EmploymentType && (
+              <div className="flex items-center">
+                <Briefcase className="mr-1 h-4 w-4" />
+                {job.EmploymentType}
+              </div>
+            )}
             <div className="flex items-center">
               <DollarSign className="mr-1 h-4 w-4" />
-              {job.SalaryRange}
+              {job.SalaryMin && job.SalaryMax 
+                ? `$${parseInt(job.SalaryMin).toLocaleString()}–$${parseInt(job.SalaryMax).toLocaleString()}`
+                : job.SalaryRange
+              }{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
             </div>
             <div className="flex items-center">
               <Clock className="mr-1 h-4 w-4" />
@@ -101,26 +111,25 @@ export default function JobDetail({ params }: { params: { id: string } }) {
         <CardContent className="space-y-6">
           <section>
             <h2 className="text-xl font-semibold mb-3">Job Description</h2>
-            <p className="text-muted-foreground">{job.Description}</p>
+            <div
+              className="text-muted-foreground break-words whitespace-pre-wrap"
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.Description || "") }}
+            />
           </section>
 
-          <section>
-            <h2 className="text-xl font-semibold mb-3">Requirements</h2>
-            <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-              {job.Requirements.split('\n').map((req, index) => (
-                <li key={index}>{req}</li>
-              ))}
-            </ul>
-          </section>
+          {job.TotalCompensation && (
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Total Compensation</h2>
+              <div className="text-muted-foreground whitespace-pre-wrap">{job.TotalCompensation}</div>
+            </section>
+          )}
 
-          <section>
-            <h2 className="text-xl font-semibold mb-3">Responsibilities</h2>
-            <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
-              {job.Responsibilities.split('\n').map((resp, index) => (
-                <li key={index}>{resp}</li>
-              ))}
-            </ul>
-          </section>
+          {job.Notes && (
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Additional Notes</h2>
+              <div className="text-muted-foreground whitespace-pre-wrap">{job.Notes}</div>
+            </section>
+          )}
 
           <div className="pt-4">
           <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">

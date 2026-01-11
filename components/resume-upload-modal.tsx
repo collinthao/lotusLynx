@@ -113,7 +113,8 @@ export function ResumeUploadModal({ isOpen, onClose }: ResumeUploadModalProps) {
         base64,
       };
 
-      // In a real application, you would upload the file to your server here
+        console.log("Submitting resume with data:", { name, email, fileName });
+
         const response = await fetch(
           "https://96ka9i6n6f.execute-api.us-east-1.amazonaws.com/dev/sendResume",
           {
@@ -125,23 +126,29 @@ export function ResumeUploadModal({ isOpen, onClose }: ResumeUploadModalProps) {
           }
         );
 
-        if (response.status != 200) {
-          throw new Error(`Error: ${response.statusText}`);
+        console.log("Response status:", response.status);
+        console.log("Response ok:", response.ok);
+
+        // Read response as text first (can only read body once)
+        const responseText = await response.text();
+        console.log("Raw response text:", responseText);
+
+        let responseData;
+        try {
+          // Try to parse as JSON
+          responseData = JSON.parse(responseText);
+          console.log("Parsed JSON response:", JSON.stringify(responseData, null, 2));
+        } catch {
+          // If not JSON, use as plain text
+          responseData = responseText;
+          console.log("Response is plain text (not JSON):", responseData);
         }
 
-      setIsSuccess(true);
+        if (!response.ok) {
+          throw new Error(`Upload failed: ${responseText}`);
+        }
 
-      // Reset form after 2 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-        setFile(null);
-        setEmail("");
-        setName("");
-        onClose();
-      }, 2000);
-    } catch (err) {
-      console.log(err)
-      setError("An error occurred. Please try again.");
+        setIsSuccess(true);
     } finally {
       setIsSubmitting(false);
     }

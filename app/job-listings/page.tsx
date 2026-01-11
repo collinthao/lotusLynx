@@ -80,9 +80,18 @@ export default function JobListings() {
                       <Briefcase className="mr-1 h-4 w-4" />
                       {job.JobType}
                     </div>
+                    {job.EmploymentType && (
+                      <div className="flex items-center">
+                        <Briefcase className="mr-1 h-4 w-4" />
+                        {job.EmploymentType}
+                      </div>
+                    )}
                     <div className="flex items-center">
                       <DollarSign className="mr-1 h-4 w-4" />
-                      {job.SalaryRange + " / " + job.SalaryPeriod}
+                      {job.SalaryMin && job.SalaryMax 
+                        ? `$${parseInt(job.SalaryMin).toLocaleString()}–$${parseInt(job.SalaryMax).toLocaleString()}`
+                        : job.SalaryRange
+                      }{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
                     </div>
                     <div className="flex items-center">
                       <Clock className="mr-1 h-4 w-4" />
