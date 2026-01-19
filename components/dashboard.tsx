@@ -263,9 +263,9 @@ export const Dashboard = () => {
 
       {/* Edit Job Modal */}
       {jobToEdit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div className="flex justify-between items-center p-6 border-b">
               <h3 className="text-lg font-semibold">Edit Job</h3>
               <button
                 onClick={() => setJobToEdit(null)}
@@ -275,25 +275,27 @@ export const Dashboard = () => {
               </button>
             </div>
 
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                console.log(jobToEdit);
-                // Capture HTML from contentEditable div
-                const descriptionHTML = editDescriptionRef.current?.innerHTML || "";
-                // Compute SalaryRange for AWS backward compatibility
-                const salaryRangeComputed =
-                  (editFormData.SalaryMin && editFormData.SalaryMax)
-                    ? `${editFormData.SalaryMin}-${editFormData.SalaryMax}`
-                    : "";
-                const updatedData = { ...editFormData, Description: descriptionHTML, SalaryRange: salaryRangeComputed };
-                // Log payload for quick verification
-                console.log("Updating job payload:", updatedData);
-                await handleEditJob(jobToEdit.ID, updatedData);
-                setJobToEdit(null);
-              }}
-              className="space-y-4"
-            >
+            <div className="overflow-y-auto flex-1 p-6">
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  console.log(jobToEdit);
+                  // Capture HTML from contentEditable div
+                  const descriptionHTML = editDescriptionRef.current?.innerHTML || "";
+                  // Compute SalaryRange for AWS backward compatibility
+                  const salaryRangeComputed =
+                    (editFormData.SalaryMin && editFormData.SalaryMax)
+                      ? `${editFormData.SalaryMin}-${editFormData.SalaryMax}`
+                      : "";
+                  const updatedData = { ...editFormData, Description: descriptionHTML, SalaryRange: salaryRangeComputed };
+                  // Log payload for quick verification
+                  console.log("Updating job payload:", updatedData);
+                  await handleEditJob(jobToEdit.ID, updatedData);
+                  setJobToEdit(null);
+                }}
+                className="space-y-4"
+                id="edit-job-form"
+              >
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Job Title</label>
                   <input
@@ -497,7 +499,7 @@ export const Dashboard = () => {
                   <div
                     ref={editDescriptionRef}
                     id="editJobDescription"
-                    className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full min-h-[6rem] max-h-[12rem] overflow-y-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     contentEditable
                     suppressContentEditableWarning
                   />
@@ -526,11 +528,13 @@ export const Dashboard = () => {
                 <button
                   type="submit"
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                  form="edit-job-form"
                 >
                   Save Changes
                 </button>
               </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       )}
