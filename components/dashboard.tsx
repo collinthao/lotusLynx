@@ -10,7 +10,6 @@ export const Dashboard = () => {
   const [jobToEdit, setJobToEdit] = useState<any>(null);
   const [editFormData, setEditFormData] = useState({
     JobTitle: "",
-    Company: "",
     Location: "",
     JobType: "",
     EmploymentType: "",
@@ -94,7 +93,6 @@ export const Dashboard = () => {
     setJobToEdit(job);
     setEditFormData({
       JobTitle: job.JobTitle,
-      Company: job.Company || job.CompanyName || "",
       Location: job.Location,
       JobType: job.JobType || "",
       EmploymentType: job.EmploymentType || "",
@@ -307,16 +305,6 @@ export const Dashboard = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Company</label>
-                  <input
-                    type="text"
-                    value={editFormData.Company}
-                    onChange={(e) => setEditFormData({ ...editFormData, Company: e.target.value })}
-                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                  />
-                </div>
-
-                <div>
                   <label className="block text-sm font-medium text-gray-700">Location</label>
                   <input
                     type="text"
@@ -413,21 +401,29 @@ export const Dashboard = () => {
                   <div className="flex flex-col gap-3">
                     <div className="flex gap-3 items-center">
                       <input
-                        type="number"
-                        value={editFormData.SalaryMin}
-                        onChange={(e) => setEditFormData({ ...editFormData, SalaryMin: e.target.value })}
+                        type="text"
+                        value={editFormData.SalaryMin ? parseInt(editFormData.SalaryMin).toLocaleString() : ''}
+                        onChange={(e) => {
+                          const numericValue = e.target.value.replace(/,/g, '');
+                          if (numericValue === '' || /^\d+$/.test(numericValue)) {
+                            setEditFormData({ ...editFormData, SalaryMin: numericValue });
+                          }
+                        }}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                        placeholder="Min"
-                        min={0}
+                        placeholder="Min (e.g., 150,000)"
                       />
                       <span className="text-sm">to</span>
                       <input
-                        type="number"
-                        value={editFormData.SalaryMax}
-                        onChange={(e) => setEditFormData({ ...editFormData, SalaryMax: e.target.value })}
+                        type="text"
+                        value={editFormData.SalaryMax ? parseInt(editFormData.SalaryMax).toLocaleString() : ''}
+                        onChange={(e) => {
+                          const numericValue = e.target.value.replace(/,/g, '');
+                          if (numericValue === '' || /^\d+$/.test(numericValue)) {
+                            setEditFormData({ ...editFormData, SalaryMax: numericValue });
+                          }
+                        }}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                        placeholder="Max"
-                        min={0}
+                        placeholder="Max (e.g., 160,000)"
                       />
                     </div>
 
@@ -496,14 +492,50 @@ export const Dashboard = () => {
                   <label htmlFor="editJobDescription" className="block text-sm font-medium text-gray-700 mb-1">
                     Job Description
                   </label>
-                  <div
-                    ref={editDescriptionRef}
-                    id="editJobDescription"
-                    className="w-full min-h-[6rem] max-h-[12rem] overflow-y-auto px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    contentEditable
-                    suppressContentEditableWarning
-                  />
-                  <p className="mt-1 text-xs text-gray-500">Edit formatted text directly.</p>
+                  <div className="border border-gray-300 rounded-md">
+                    <div className="flex gap-1 p-2 border-b bg-gray-50">
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('bold', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm font-bold"
+                        title="Bold"
+                      >
+                        B
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('italic', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm italic"
+                        title="Italic"
+                      >
+                        I
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('underline', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm underline"
+                        title="Underline"
+                      >
+                        U
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('removeFormat', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+                        title="Clear Formatting"
+                      >
+                        Clear
+                      </button>
+                    </div>
+                    <div
+                      ref={editDescriptionRef}
+                      id="editJobDescription"
+                      className="w-full min-h-[6rem] max-h-[12rem] overflow-y-auto px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      contentEditable
+                      suppressContentEditableWarning
+                    />
+                  </div>
+                  <p className="mt-1 text-xs text-gray-500">Use the toolbar to format text or clear formatting from pasted content.</p>
                 </div>
 
                 <div>

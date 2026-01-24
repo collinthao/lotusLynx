@@ -90,7 +90,14 @@ export default function JobListings() {
                       <DollarSign className="mr-1 h-4 w-4" />
                       {job.SalaryMin && job.SalaryMax 
                         ? `$${parseInt(job.SalaryMin).toLocaleString()}–$${parseInt(job.SalaryMax).toLocaleString()}`
-                        : job.SalaryRange
+                        : job.SalaryRange ? (() => {
+                            const parts = job.SalaryRange.split('-');
+                            if (parts.length === 2) {
+                              return `$${parseInt(parts[0]).toLocaleString()}–$${parseInt(parts[1]).toLocaleString()}`;
+                            }
+                            return job.SalaryRange;
+                          })()
+                        : 'Not specified'
                       }{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
                     </div>
                     <div className="flex items-center">
@@ -98,6 +105,13 @@ export default function JobListings() {
                       Posted {job.DatePosted}
                     </div>
                   </div>
+
+                  {job.TotalCompensation && (
+                    <div className="mt-3 text-sm">
+                      <strong>Total Compensation:</strong>
+                      <p className="text-muted-foreground mt-1">{job.TotalCompensation}</p>
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-4 md:mt-0">

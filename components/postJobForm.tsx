@@ -4,9 +4,19 @@ import { useState, useRef } from "react";
 import { Check } from "lucide-react"; // Optional: icon for success
 
 export default function PostJobForm({ session }: { session?: any }) {
+  // Helper functions for salary formatting
+  const formatNumber = (value: string) => {
+    const num = value.replace(/,/g, '');
+    if (!num) return '';
+    return parseInt(num).toLocaleString();
+  };
+
+  const parseNumber = (value: string) => {
+    return value.replace(/,/g, '');
+  };
+
   const [formData, setFormData] = useState({
     JobTitle: "",
-    CompanyName: "",
     Location: "",
     JobType: "",
     EmploymentType: "",
@@ -27,13 +37,21 @@ export default function PostJobForm({ session }: { session?: any }) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Format salary fields with commas
+    if (name === 'SalaryMin' || name === 'SalaryMax') {
+      const numericValue = parseNumber(value);
+      if (numericValue === '' || /^\d+$/.test(numericValue)) {
+        setFormData((prev) => ({ ...prev, [name]: numericValue }));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const resetForm = () => {
     setFormData({
       JobTitle: "",
-      CompanyName: "",
       Location: "",
       JobType: "",
       EmploymentType: "",
@@ -119,21 +137,6 @@ export default function PostJobForm({ session }: { session?: any }) {
           onChange={handleChange}
           className="w-full px-3 py-2 border rounded-md"
           required
-        />
-      </div>
-
-      <div>
-        <label htmlFor="companyName" className="block text-sm font-medium mb-1">
-          Company Name
-        </label>
-        <input
-          type="text"
-          id="companyName"
-          name="CompanyName"
-          value={formData.CompanyName}
-          onChange={handleChange}
-          className="w-full px-3 py-2 border rounded-md"
-          placeholder="e.g., Acme Corp"
         />
       </div>
 
@@ -245,25 +248,23 @@ export default function PostJobForm({ session }: { session?: any }) {
         <div className="flex flex-col gap-3">
           <div className="flex gap-3 items-center">
             <input
-              type="number"
+              type="text"
               id="salaryMin"
               name="SalaryMin"
-              value={formData.SalaryMin}
+              value={formatNumber(formData.SalaryMin)}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
-              placeholder="Min (e.g., 150000)"
-              min="0"
+              placeholder="Min (e.g., 150,000)"
             />
             <span className="text-sm">to</span>
             <input
-              type="number"
+              type="text"
               id="salaryMax"
               name="SalaryMax"
-              value={formData.SalaryMax}
+              value={formatNumber(formData.SalaryMax)}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
-              placeholder="Max (e.g., 160000)"
-              min="0"
+              placeholder="Max (e.g., 160,000)"
             />
           </div>
 
@@ -329,14 +330,50 @@ export default function PostJobForm({ session }: { session?: any }) {
         <label htmlFor="jobDescription" className="block text-sm font-medium mb-1">
           Job Description
         </label>
-        <div
-          ref={descriptionEditorRef}
-          id="jobDescription"
-          className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          contentEditable
-          suppressContentEditableWarning
-        />
-        <p className="mt-1 text-xs text-muted-foreground">Paste formatted text and it will be preserved.</p>
+        <div className="border rounded-md">
+          <div className="flex gap-1 p-2 border-b bg-gray-50">
+            <button
+              type="button"
+              onClick={() => document.execCommand('bold', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm font-bold"
+              title="Bold"
+            >
+              B
+            </button>
+            <button
+              type="button"
+              onClick={() => document.execCommand('italic', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm italic"
+              title="Italic"
+            >
+              I
+            </button>
+            <button
+              type="button"
+              onClick={() => document.execCommand('underline', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm underline"
+              title="Underline"
+            >
+              U
+            </button>
+            <button
+              type="button"
+              onClick={() => document.execCommand('removeFormat', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+              title="Clear Formatting"
+            >
+              Clear
+            </button>
+          </div>
+          <div
+            ref={descriptionEditorRef}
+            id="jobDescription"
+            className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            contentEditable
+            suppressContentEditableWarning
+          />
+        </div>
+        <p className="mt-1 text-xs text-muted-foreground">Use the toolbar to format text or paste formatted content.</p>
       </div>
 
       {/* <div>
