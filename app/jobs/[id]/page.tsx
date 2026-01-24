@@ -96,8 +96,8 @@ export default function JobDetail({ params }: { params: { id: string } }) {
             )}
             <div className="flex items-center">
               <DollarSign className="mr-1 h-4 w-4" />
-              {job.SalaryMin && job.SalaryMax 
-                ? `$${parseInt(job.SalaryMin).toLocaleString()}–$${parseInt(job.SalaryMax).toLocaleString()}`
+              {job.SalaryMid && job.SalaryMax 
+                ? `$${parseInt(job.SalaryMid).toLocaleString()}–$${parseInt(job.SalaryMax).toLocaleString()}`
                 : job.SalaryRange ? (() => {
                     const parts = job.SalaryRange.split('-');
                     if (parts.length === 2) {

@@ -20,7 +20,7 @@ export default function PostJobForm({ session }: { session?: any }) {
     Location: "",
     JobType: "",
     EmploymentType: "",
-    SalaryMin: "",
+    SalaryMid: "",
     SalaryMax: "",
     SalaryPeriod: "",
     TotalCompensation: "",
@@ -39,7 +39,7 @@ export default function PostJobForm({ session }: { session?: any }) {
     const { name, value } = e.target;
     
     // Format salary fields with commas
-    if (name === 'SalaryMin' || name === 'SalaryMax') {
+    if (name === 'SalaryMid' || name === 'SalaryMax') {
       const numericValue = parseNumber(value);
       if (numericValue === '' || /^\d+$/.test(numericValue)) {
         setFormData((prev) => ({ ...prev, [name]: numericValue }));
@@ -55,7 +55,7 @@ export default function PostJobForm({ session }: { session?: any }) {
       Location: "",
       JobType: "",
       EmploymentType: "",
-      SalaryMin: "",
+      SalaryMid: "",
       SalaryMax: "",
       SalaryPeriod: "",
       TotalCompensation: "",
@@ -74,8 +74,8 @@ export default function PostJobForm({ session }: { session?: any }) {
     const descriptionHTML = descriptionEditorRef.current?.innerHTML || "";
     // Compute SalaryRange for AWS backward compatibility
     const salaryRangeComputed =
-      (formData.SalaryMin && formData.SalaryMax)
-        ? `${formData.SalaryMin}-${formData.SalaryMax}`
+      (formData.SalaryMid && formData.SalaryMax)
+        ? `${formData.SalaryMid}-${formData.SalaryMax}`
         : "";
     
     const jobData = {
@@ -250,8 +250,8 @@ export default function PostJobForm({ session }: { session?: any }) {
             <input
               type="text"
               id="salaryMin"
-              name="SalaryMin"
-              value={formatNumber(formData.SalaryMin)}
+              name="SalaryMid"
+              value={formatNumber(formData.SalaryMid)}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
               placeholder="Min (e.g., 150,000)"
@@ -420,8 +420,8 @@ export default function PostJobForm({ session }: { session?: any }) {
         <div className="mt-2 border rounded-md p-3 bg-gray-50 overflow-auto max-h-[16rem]">
           <pre className="text-xs">
             {(() => {
-              const salaryRangeComputed = (formData.SalaryMin && formData.SalaryMax)
-                ? `${formData.SalaryMin}-${formData.SalaryMax}`
+              const salaryRangeComputed = (formData.SalaryMid && formData.SalaryMax)
+                ? `${formData.SalaryMid}-${formData.SalaryMax}`
                 : "";
               const descriptionHTML = descriptionEditorRef.current?.innerHTML || "";
               const preview = {

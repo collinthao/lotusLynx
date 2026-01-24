@@ -13,7 +13,7 @@ export const Dashboard = () => {
     Location: "",
     JobType: "",
     EmploymentType: "",
-    SalaryMin: "",
+    SalaryMid: "",
     SalaryMax: "",
     SalaryPeriod: "",
     TotalCompensation: "",
@@ -96,7 +96,7 @@ export const Dashboard = () => {
       Location: job.Location,
       JobType: job.JobType || "",
       EmploymentType: job.EmploymentType || "",
-      SalaryMin: job.SalaryMin || "",
+      SalaryMid: job.SalaryMid || "",
       SalaryMax: job.SalaryMax || "",
       SalaryPeriod: job.SalaryPeriod ?? "",
       TotalCompensation: job.TotalCompensation || "",
@@ -282,8 +282,8 @@ export const Dashboard = () => {
                   const descriptionHTML = editDescriptionRef.current?.innerHTML || "";
                   // Compute SalaryRange for AWS backward compatibility
                   const salaryRangeComputed =
-                    (editFormData.SalaryMin && editFormData.SalaryMax)
-                      ? `${editFormData.SalaryMin}-${editFormData.SalaryMax}`
+                    (editFormData.SalaryMid && editFormData.SalaryMax)
+                      ? `${editFormData.SalaryMid}-${editFormData.SalaryMax}`
                       : "";
                   const updatedData = { ...editFormData, Description: descriptionHTML, SalaryRange: salaryRangeComputed };
                   // Log payload for quick verification
@@ -402,11 +402,11 @@ export const Dashboard = () => {
                     <div className="flex gap-3 items-center">
                       <input
                         type="text"
-                        value={editFormData.SalaryMin ? parseInt(editFormData.SalaryMin).toLocaleString() : ''}
+                        value={editFormData.SalaryMid ? parseInt(editFormData.SalaryMid).toLocaleString() : ''}
                         onChange={(e) => {
                           const numericValue = e.target.value.replace(/,/g, '');
                           if (numericValue === '' || /^\d+$/.test(numericValue)) {
-                            setEditFormData({ ...editFormData, SalaryMin: numericValue });
+                            setEditFormData({ ...editFormData, SalaryMid: numericValue });
                           }
                         }}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md"
