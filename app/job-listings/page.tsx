@@ -98,20 +98,15 @@ export default function JobListings() {
                             return job.SalaryRange;
                           })()
                         : 'Not specified'
-                      }{job.CompDetails ? '+' : ''}{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
+                      }
+                      {job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
+                      {job.CompDetails ? ` + ${job.CompDetails}` : ''}
                     </div>
                     <div className="flex items-center">
                       <Clock className="mr-1 h-4 w-4" />
                       Posted {job.DatePosted}
                     </div>
                   </div>
-
-                  {job.CompDetails && (
-                    <div className="mt-3 text-sm">
-                      <strong>Additional Compensation:</strong>
-                      <p className="text-muted-foreground mt-1">{job.CompDetails}</p>
-                    </div>
-                  )}
 
                   {job.TotalCompensation && (
                     <div className="mt-3 text-sm">

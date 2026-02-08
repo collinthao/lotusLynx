@@ -119,7 +119,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           <section>
             <h2 className="text-xl font-semibold mb-3">Job Description</h2>
             <div
-              className="text-muted-foreground break-words whitespace-pre-wrap"
+              className="text-muted-foreground break-words whitespace-pre-wrap [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-4 [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-4 [&_li]:mb-1"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.Description || "") }}
             />
           </section>

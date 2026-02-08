@@ -251,7 +251,7 @@ export default function PostJobForm({ session }: { session?: any }) {
           <div className="flex gap-3 items-center">
             <input
               type="text"
-              id="salaryMin"
+              id="salaryMid"
               name="SalaryMid"
               value={formatNumber(formData.SalaryMid)}
               onChange={handleChange}
@@ -376,20 +376,38 @@ export default function PostJobForm({ session }: { session?: any }) {
             </button>
             <div className="border-r border-gray-300 mx-1" />
             <select
-              onChange={(e) => document.execCommand('fontSize', false, e.target.value)}
+              onChange={(e) => {
+                const size = e.target.value;
+                document.execCommand('fontSize', false, '7');
+                const fontElements = document.getElementsByTagName('font');
+                for (let i = 0; i < fontElements.length; i++) {
+                  if (fontElements[i].size === '7') {
+                    fontElements[i].removeAttribute('size');
+                    fontElements[i].style.fontSize = size;
+                  }
+                }
+              }}
               className="px-2 py-1 hover:bg-gray-200 rounded text-sm border-0 bg-transparent cursor-pointer"
               title="Font Size"
-              defaultValue="3"
+              defaultValue=""
             >
-              <option value="1">Small</option>
-              <option value="3">Normal</option>
-              <option value="5">Large</option>
-              <option value="7">Huge</option>
+              <option value="">Font Size</option>
+              <option value="12px">12px</option>
+              <option value="14px">14px</option>
+              <option value="16px">16px</option>
+              <option value="18px">18px</option>
+              <option value="20px">20px</option>
+              <option value="24px">24px</option>
+              <option value="28px">28px</option>
             </select>
             <div className="border-r border-gray-300 mx-1" />
             <button
               type="button"
-              onClick={() => document.execCommand('insertUnorderedList', false)}
+              onClick={(e) => {
+                e.preventDefault();
+                descriptionEditorRef.current?.focus();
+                document.execCommand('insertUnorderedList', false, undefined);
+              }}
               className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
               title="Bullet List"
             >
@@ -397,7 +415,11 @@ export default function PostJobForm({ session }: { session?: any }) {
             </button>
             <button
               type="button"
-              onClick={() => document.execCommand('insertOrderedList', false)}
+              onClick={(e) => {
+                e.preventDefault();
+                descriptionEditorRef.current?.focus();
+                document.execCommand('insertOrderedList', false, undefined);
+              }}
               className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
               title="Numbered List"
             >
@@ -416,7 +438,7 @@ export default function PostJobForm({ session }: { session?: any }) {
           <div
             ref={descriptionEditorRef}
             id="jobDescription"
-            className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full min-h-[8rem] max-h-[20rem] overflow-y-auto px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 [&_ul]:list-disc [&_ul]:ml-6 [&_ol]:list-decimal [&_ol]:ml-6 [&_li]:mb-1"
             contentEditable
             suppressContentEditableWarning
           />
