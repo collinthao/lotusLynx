@@ -23,6 +23,7 @@ export default function PostJobForm({ session }: { session?: any }) {
     SalaryMid: "",
     SalaryMax: "",
     SalaryPeriod: "",
+    CompDetails: "",
     TotalCompensation: "",
     Notes: "",
     Description: "",
@@ -58,6 +59,7 @@ export default function PostJobForm({ session }: { session?: any }) {
       SalaryMid: "",
       SalaryMax: "",
       SalaryPeriod: "",
+      CompDetails: "",
       TotalCompensation: "",
       Notes: "",
       Description: "",
@@ -312,6 +314,22 @@ export default function PostJobForm({ session }: { session?: any }) {
       </div>
 
       <div>
+        <label htmlFor="compDetails" className="block text-sm font-medium mb-1">
+          Additional Compensation
+        </label>
+        <input
+          type="text"
+          id="compDetails"
+          name="CompDetails"
+          value={formData.CompDetails}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded-md"
+          placeholder="e.g., sign-on bonus, equity, profit sharing"
+        />
+        <p className="mt-1 text-xs text-muted-foreground">If filled, a + sign will appear after the salary with these details</p>
+      </div>
+
+      <div>
         <label htmlFor="totalCompensation" className="block text-sm font-medium mb-1">
           Total Compensation Details
         </label>
@@ -331,7 +349,7 @@ export default function PostJobForm({ session }: { session?: any }) {
           Job Description
         </label>
         <div className="border rounded-md">
-          <div className="flex gap-1 p-2 border-b bg-gray-50">
+          <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50">
             <button
               type="button"
               onClick={() => document.execCommand('bold', false)}
@@ -356,6 +374,36 @@ export default function PostJobForm({ session }: { session?: any }) {
             >
               U
             </button>
+            <div className="border-r border-gray-300 mx-1" />
+            <select
+              onChange={(e) => document.execCommand('fontSize', false, e.target.value)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm border-0 bg-transparent cursor-pointer"
+              title="Font Size"
+              defaultValue="3"
+            >
+              <option value="1">Small</option>
+              <option value="3">Normal</option>
+              <option value="5">Large</option>
+              <option value="7">Huge</option>
+            </select>
+            <div className="border-r border-gray-300 mx-1" />
+            <button
+              type="button"
+              onClick={() => document.execCommand('insertUnorderedList', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+              title="Bullet List"
+            >
+              • List
+            </button>
+            <button
+              type="button"
+              onClick={() => document.execCommand('insertOrderedList', false)}
+              className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+              title="Numbered List"
+            >
+              1. List
+            </button>
+            <div className="border-r border-gray-300 mx-1" />
             <button
               type="button"
               onClick={() => document.execCommand('removeFormat', false)}

@@ -106,7 +106,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
                     return job.SalaryRange;
                   })()
                 : 'Not specified'
-              }{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
+              }{job.CompDetails ? '+' : ''}{job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
             </div>
             <div className="flex items-center">
               <Clock className="mr-1 h-4 w-4" />
@@ -123,6 +123,13 @@ export default function JobDetail({ params }: { params: { id: string } }) {
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(job.Description || "") }}
             />
           </section>
+
+          {job.CompDetails && (
+            <section>
+              <h2 className="text-xl font-semibold mb-3">Additional Compensation</h2>
+              <div className="text-muted-foreground whitespace-pre-wrap">{job.CompDetails}</div>
+            </section>
+          )}
 
           {job.TotalCompensation && (
             <section>

@@ -16,6 +16,7 @@ export const Dashboard = () => {
     SalaryMid: "",
     SalaryMax: "",
     SalaryPeriod: "",
+    CompDetails: "",
     TotalCompensation: "",
     DatePosted: "",
     Description: "",
@@ -99,6 +100,7 @@ export const Dashboard = () => {
       SalaryMid: job.SalaryMid || "",
       SalaryMax: job.SalaryMax || "",
       SalaryPeriod: job.SalaryPeriod ?? "",
+      CompDetails: job.CompDetails || "",
       TotalCompensation: job.TotalCompensation || "",
       DatePosted: job.DatePosted,
       Description: job.Description || "",
@@ -468,6 +470,18 @@ export const Dashboard = () => {
                 </div>
 
                 <div>
+                  <label className="block text-sm font-medium text-gray-700">Additional Compensation</label>
+                  <input
+                    type="text"
+                    value={editFormData.CompDetails}
+                    onChange={(e) => setEditFormData({ ...editFormData, CompDetails: e.target.value })}
+                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                    placeholder="e.g., sign-on bonus, equity, profit sharing"
+                  />
+                  <p className="mt-1 text-xs text-gray-500">If filled, a + sign will appear after the salary with these details</p>
+                </div>
+
+                <div>
                   <label className="block text-sm font-medium text-gray-700">Total Compensation Details</label>
                   <textarea
                     value={editFormData.TotalCompensation}
@@ -493,7 +507,7 @@ export const Dashboard = () => {
                     Job Description
                   </label>
                   <div className="border border-gray-300 rounded-md">
-                    <div className="flex gap-1 p-2 border-b bg-gray-50">
+                    <div className="flex flex-wrap gap-1 p-2 border-b bg-gray-50">
                       <button
                         type="button"
                         onClick={() => document.execCommand('bold', false)}
@@ -518,6 +532,36 @@ export const Dashboard = () => {
                       >
                         U
                       </button>
+                      <div className="border-r border-gray-300 mx-1" />
+                      <select
+                        onChange={(e) => document.execCommand('fontSize', false, e.target.value)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm border-0 bg-transparent cursor-pointer"
+                        title="Font Size"
+                        defaultValue="3"
+                      >
+                        <option value="1">Small</option>
+                        <option value="3">Normal</option>
+                        <option value="5">Large</option>
+                        <option value="7">Huge</option>
+                      </select>
+                      <div className="border-r border-gray-300 mx-1" />
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('insertUnorderedList', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+                        title="Bullet List"
+                      >
+                        • List
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => document.execCommand('insertOrderedList', false)}
+                        className="px-2 py-1 hover:bg-gray-200 rounded text-sm"
+                        title="Numbered List"
+                      >
+                        1. List
+                      </button>
+                      <div className="border-r border-gray-300 mx-1" />
                       <button
                         type="button"
                         onClick={() => document.execCommand('removeFormat', false)}
