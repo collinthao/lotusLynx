@@ -102,10 +102,6 @@ export default function JobListings() {
                       {job.SalaryPeriod && ` / ${job.SalaryPeriod}`}
                       {job.CompDetails ? ` + ${job.CompDetails}` : ''}
                     </div>
-                    <div className="flex items-center">
-                      <Clock className="mr-1 h-4 w-4" />
-                      Posted {job.DatePosted}
-                    </div>
                   </div>
 
                   {job.TotalCompensation && (
