@@ -149,7 +149,7 @@ export default function JobDetail({ params }: { params: { id: string } }) {
           <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">
         Apply Now
       </Button>
-      <ResumeUploadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ResumeUploadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} jobTitle={job.JobTitle} />
 
           </div>
         </CardContent>

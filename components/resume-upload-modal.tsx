@@ -20,9 +20,10 @@ import { cn } from "@/lib/utils";
 interface ResumeUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
+  jobTitle?: string;
 }
 
-export function ResumeUploadModal({ isOpen, onClose }: ResumeUploadModalProps) {
+export function ResumeUploadModal({ isOpen, onClose, jobTitle }: ResumeUploadModalProps) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -111,9 +112,10 @@ export function ResumeUploadModal({ isOpen, onClose }: ResumeUploadModalProps) {
         email,
         fileName,
         base64,
+        ...(jobTitle ? { jobTitle } : {}),
       };
 
-        console.log("Submitting resume with data:", { name, email, fileName });
+        console.log("Submitting resume with data:", { name, email, fileName, jobTitle });
 
         const response = await fetch(
           "https://96ka9i6n6f.execute-api.us-east-1.amazonaws.com/dev/sendResume",
