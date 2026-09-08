@@ -1,8 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+
+config.autoAddCss = false
 
 const inter = Inter({ subsets: ["latin"] })
 
