@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faYoutube, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faFacebookF } from "@fortawesome/free-brands-svg-icons";
 
 export function Footer() {
   const navItems = [
@@ -30,16 +30,12 @@ export function Footer() {
           ))}
         </nav>
 
-        {/* Social Media Icons */}
         <div className="flex justify-center gap-6 mb-8">
-          <Link href="https://www.linkedin.com" target="_blank">
+          <Link href="https://www.linkedin.com/company/lotuslynx/posts/?feedView=all" target="_blank" rel="noreferrer" aria-label="LotusLynx LinkedIn">
             <FontAwesomeIcon icon={faLinkedin} className="text-xl hover:text-blue-500 transition" />
           </Link>
-          <Link href="https://www.youtube.com" target="_blank">
-            <FontAwesomeIcon icon={faYoutube} className="text-xl hover:text-red-500 transition" />
-          </Link>
-          <Link href="https://www.instagram.com" target="_blank">
-            <FontAwesomeIcon icon={faInstagram} className="text-xl hover:text-pink-500 transition" />
+          <Link href="https://www.facebook.com/lotuslynx" target="_blank" rel="noreferrer" aria-label="LotusLynx Facebook">
+            <FontAwesomeIcon icon={faFacebookF} className="text-xl hover:text-blue-400 transition" />
           </Link>
         </div>
 

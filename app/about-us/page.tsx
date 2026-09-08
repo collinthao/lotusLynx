@@ -3,21 +3,6 @@ import Link from "next/link"
 import Header from "@/components/ui/header"
 import Footer from "@/components/ui/footer"
 
-const founders = [
-  {
-    "Name": "Ashley Bender",
-    "Role": "Founder/Principal Recruiter",
-    "Link": "https://www.linkedin.com/in/ashley-bender-6730b578/",
-    "Image": './ashley_headshot.png'
-  },
-  // {
-  //   "Name": "Kevin McKenzie",
-  //   "Role": "Director of Operations & Strategy",
-  //   "Link": "https://www.linkedin.com/in/kevin-mckenzie-557b2434/",
-  //   "Image": './Portion2.png'
-  // },
-]
-
 export default function AboutPage() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -105,29 +90,6 @@ export default function AboutPage() {
     </div>
   </div>
 </section>
-
-
-        {/* Team Section */}
-        <section className="container mx-auto px-4 py-12 text-center">
-  <h2 className="text-3xl font-bold text-[#282041] mb-12">Our Team</h2>
-  <div className="flex flex-wrap justify-center gap-36">
-    {[0].map((i) => (
-      <div key={i} className="flex flex-col items-center">
-        <a href={founders[i]["Link"]} target="_blank" rel="noopener noreferrer">
-          <img
-            src={founders[i]["Image"]}
-            alt={founders[i]["Name"]}
-            className="w-40 h-40 rounded-full object-cover mb-4 hover:opacity-90 transition"
-          />
-        </a>
-        <h3 className="text-xl font-semibold">{founders[i]["Name"]}</h3>
-        <p className="text-gray-600">{founders[i]["Role"]}</p>
-      </div>
-    ))}
-  </div>
-</section>
-
-
 
 
         {/* CTA Section */}
