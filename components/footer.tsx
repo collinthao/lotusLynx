@@ -31,7 +31,7 @@ export function Footer() {
         </nav>
 
         <div className="flex justify-center gap-6 mb-8">
-          <Link href="https://www.linkedin.com/company/lotuslynx/posts/?feedView=all" target="_blank" rel="noreferrer" aria-label="LotusLynx LinkedIn">
+          <Link href="https://www.linkedin.com/company/lotuslynx/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LotusLynx LinkedIn">
             <FontAwesomeIcon icon={faLinkedin} className="text-xl hover:text-blue-500 transition" />
           </Link>
           <Link href="https://www.facebook.com/lotuslynx" target="_blank" rel="noreferrer" aria-label="LotusLynx Facebook">
