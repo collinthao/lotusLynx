@@ -35,7 +35,7 @@ export default function Footer() {
           <Link href="https://www.linkedin.com/company/lotuslynx/?viewAsMember=true" target="_blank" rel="noreferrer" aria-label="LotusLynx LinkedIn">
             <FontAwesomeIcon icon={faLinkedin} className="text-xl hover:text-blue-500 transition" />
           </Link>
-          <Link href="https://www.facebook.com/lotuslynx" target="_blank" rel="noreferrer" aria-label="LotusLynx Facebook">
+          <Link href="https://www.facebook.com/profile.php?id=61575549911416" target="_blank" rel="noreferrer" aria-label="LotusLynx Facebook">
             <FontAwesomeIcon icon={faFacebookF} className="text-xl hover:text-blue-400 transition" />
           </Link>
         </div>
